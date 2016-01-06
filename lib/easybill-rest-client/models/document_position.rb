@@ -312,6 +312,12 @@ module Easybill
     end
 
     def _deserialize(type, value)
+      # TODO: Workaround for faulty data we get from Easybill, find a nicer way
+      # to deal with this.
+      if type.to_sym == :Float && value == false
+        return nil
+      end
+
       case type.to_sym
       when :DateTime
         DateTime.parse(value)
