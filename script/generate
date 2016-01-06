@@ -9,7 +9,9 @@ GEM_NAME='easybill-rest-client'
 SOURCE_DIR="$BUILD_DIR/$GEM_NAME"
 TARGET_DIR="$TEMP_DIR/$GEM_NAME"
 
-[ -e $GEM_NAME ] && rm -r $GEM_NAME
+[ -e $TARGET_DIR ] && rm -r $TARGET_DIR
+[ -e $BUILD_DIR ] && rm -r $BUILD_DIR
+
 mkdir -p $BUILD_DIR
 git clone https://github.com/swagger-api/swagger-codegen $BUILD_DIR
 cp config.json $BUILD_DIR
