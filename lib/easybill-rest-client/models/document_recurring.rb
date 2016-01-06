@@ -181,7 +181,7 @@ module Easybill
 
     # Custom attribute writer method checking allowed values (enum).
     def status=(status)
-      allowed_values = ["RUNNING", "PAUSE", "STOP"]
+      allowed_values = ["RUNNING", "PAUSE", "STOP", "WAITING"]
       if status && !allowed_values.include?(status)
         fail "invalid value for 'status', must be one of #{allowed_values}"
       end
