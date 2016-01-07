@@ -20,7 +20,11 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.cassette_library_dir = "spec/fixtures/vcr"
   c.hook_into :webmock
-  c.filter_sensitive_data('easybill-username') { ENV['EASYBILL_USERNAME'] }
-  c.filter_sensitive_data('easybill-api-key') { ENV['EASYBILL_API_KEY'] }
-  c.filter_sensitive_data('easybill-basic-auth-key') { ENV['EASYBILL_BASIC_AUTH_KEY'] }
+  c.filter_sensitive_data('easybill-username') { ENV.fetch('EASYBILL_USERNAME') }
+  c.filter_sensitive_data('easybill-api-key') { ENV.fetch('EASYBILL_API_KEY') }
+  c.filter_sensitive_data('easybill-basic-auth-key') { ENV.fetch('EASYBILL_BASIC_AUTH_KEY') }
 end
+
+ENV['EASYBILL_USERNAME'] = 'easybill-username'
+ENV['EASYBILL_API_KEY'] = 'easybill-api-key'
+ENV['EASYBILL_BASIC_AUTH_KEY'] = 'easybill-basic-auth-key'
