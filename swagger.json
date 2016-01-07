@@ -2472,7 +2472,8 @@
                     "enum": [
                         "RUNNING",
                         "PAUSE",
-                        "STOP"
+                        "STOP",
+                        "WAITING"
                     ]
                 },
                 "as_draft": {
