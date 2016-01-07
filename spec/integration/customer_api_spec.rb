@@ -10,6 +10,13 @@ RSpec.describe Easybill::CustomerApi, :vcr do
     end
   end
 
+  describe '#customers_id_get' do
+    it 'returns a customer by id' do
+      customer = subject.customers_id_get(51374354)
+      expect(customer.id).to eq(51374354)
+    end
+  end
+
   describe '#customers_post' do
     it 'creates a customer' do
       customer = subject.customers_post({ company_name: 'ACME Inc.', last_name: 'Smith' })
