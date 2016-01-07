@@ -15,20 +15,21 @@ TARGET_DIR="$TEMP_DIR/$GEM_NAME"
 mkdir -p $BUILD_DIR
 git clone https://github.com/swagger-api/swagger-codegen $BUILD_DIR
 cp config.json $BUILD_DIR
+cp swagger.json $BUILD_DIR
 cd $BUILD_DIR
 ./run-in-docker.sh mvn package
-./run-in-docker.sh generate -i https://api.easybill.de/rest/v1/swagger.json \
+./run-in-docker.sh generate -i swagger.json \
                             -l ruby \
-							-o $GEM_NAME \
-							-c config.json
+                            -o $GEM_NAME \
+                            -c config.json
 
 cp -r $SOURCE_DIR $TARGET_DIR
 
 # Change permissions of created files since they are owned by root.
 docker run -it \
-        -w /gen \
-		-v "$BUILD_DIR:/gen" \
-        maven:3-jdk-7 \
-		chmod 777 -R .
+            -w /gen \
+            -v "$BUILD_DIR:/gen" \
+            maven:3-jdk-7 \
+            chmod 777 -R .
 
 rm -rf $BUILD_DIR
