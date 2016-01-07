@@ -25,6 +25,6 @@ VCR.configure do |c|
   c.filter_sensitive_data('easybill-basic-auth-key') { ENV.fetch('EASYBILL_BASIC_AUTH_KEY') }
 end
 
-ENV['EASYBILL_USERNAME'] = 'easybill-username'
-ENV['EASYBILL_API_KEY'] = 'easybill-api-key'
-ENV['EASYBILL_BASIC_AUTH_KEY'] = 'easybill-basic-auth-key'
+ENV['EASYBILL_USERNAME'] ||= 'easybill-username'
+ENV['EASYBILL_API_KEY'] ||= 'easybill-api-key'
+ENV['EASYBILL_BASIC_AUTH_KEY'] ||= 'easybill-basic-auth-key'

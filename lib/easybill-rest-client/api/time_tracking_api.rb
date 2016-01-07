@@ -11,6 +11,7 @@ module Easybill
     # Fetch time trackings list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [TimeTrackings]
     def time_trackings_get(opts = {})
       data, status_code, headers = time_trackings_get_with_http_info(opts)
@@ -20,6 +21,7 @@ module Easybill
     # Fetch time trackings list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [Array<(TimeTrackings, Fixnum, Hash)>] TimeTrackings data, response status code and response headers
     def time_trackings_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -31,6 +33,7 @@ module Easybill
 
       # query parameters
       query_params = {}
+      query_params[:'page'] = opts[:'page'] if opts[:'page']
 
       # header parameters
       header_params = {}

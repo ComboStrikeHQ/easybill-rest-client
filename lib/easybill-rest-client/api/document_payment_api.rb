@@ -11,6 +11,7 @@ module Easybill
     # Fetch document payments list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [DocumentPayments]
     def document_payments_get(opts = {})
       data, status_code, headers = document_payments_get_with_http_info(opts)
@@ -20,6 +21,7 @@ module Easybill
     # Fetch document payments list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [Array<(DocumentPayments, Fixnum, Hash)>] DocumentPayments data, response status code and response headers
     def document_payments_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -31,6 +33,7 @@ module Easybill
 
       # query parameters
       query_params = {}
+      query_params[:'page'] = opts[:'page'] if opts[:'page']
 
       # header parameters
       header_params = {}

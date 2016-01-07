@@ -63,6 +63,15 @@
                     "customer"
                 ],
                 "summary": "Fetch customers list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -227,6 +236,13 @@
                         "name": "customerId",
                         "description": "ID of customer that needs to be fetched",
                         "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
                         "type": "integer",
                         "format": "int64"
                     }
@@ -466,6 +482,13 @@
                         "name": "document_date",
                         "description": "Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -777,6 +800,15 @@
                     "customer group"
                 ],
                 "summary": "Fetch customer group list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1083,6 +1115,15 @@
                     "project"
                 ],
                 "summary": "Fetch projects list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1236,6 +1277,15 @@
                     "position"
                 ],
                 "summary": "Fetch positions list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1389,6 +1439,16 @@
                     "position group"
                 ],
                 "summary": "Fetch position group list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1542,6 +1602,15 @@
                     "time tracking"
                 ],
                 "summary": "Fetch time trackings list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1695,6 +1764,15 @@
                     "text template"
                 ],
                 "summary": "Fetch text templates list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -1848,6 +1926,15 @@
                     "attachment"
                 ],
                 "summary": "Fetch attachments list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -2037,6 +2124,15 @@
                     "document payment"
                 ],
                 "summary": "Fetch document payments list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",

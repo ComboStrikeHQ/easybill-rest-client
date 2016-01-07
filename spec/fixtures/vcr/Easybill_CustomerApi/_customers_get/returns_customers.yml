@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.easybill.de/rest/v1/customers
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - ruby-swagger-0.0.1
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic easybill-basic-auth-key
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.8.0
+      Date:
+      - Thu, 07 Jan 2016 15:20:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"page":1,"pages":1,"limit":100,"total":1,"items":[{"acquire_options":"1","bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"7","cash_discount":null,"cash_discount_type":null,"city":"Springfield","company_name":"Compuglobalhypermeganet","country":"US","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Homer","grace_period":null,"group_id":null,"id":16314756,"info_1":null,"info_2":null,"internet":null,"last_name":"Simpson","mobile":null,"note":null,"number":"154085","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"1","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"154085","since_date":null,"street":"742
+        Evergreen Terrace","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}]}'
+    http_version: 
+  recorded_at: Thu, 07 Jan 2016 15:20:45 GMT
+recorded_with: VCR 3.0.1

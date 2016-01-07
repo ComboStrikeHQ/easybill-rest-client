@@ -11,6 +11,7 @@ module Easybill
     # Fetch text templates list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [TextTemplates]
     def text_templates_get(opts = {})
       data, status_code, headers = text_templates_get_with_http_info(opts)
@@ -20,6 +21,7 @@ module Easybill
     # Fetch text templates list
     # 
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page 
     # @return [Array<(TextTemplates, Fixnum, Hash)>] TextTemplates data, response status code and response headers
     def text_templates_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -31,6 +33,7 @@ module Easybill
 
       # query parameters
       query_params = {}
+      query_params[:'page'] = opts[:'page'] if opts[:'page']
 
       # header parameters
       header_params = {}
