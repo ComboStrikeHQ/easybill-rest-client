@@ -1,4 +1,4 @@
-# easybill-rest-client
+# easybill-rest-client [![Circle CI](https://circleci.com/gh/ad2games/easybill-rest-client/tree/master.svg?style=svg)](https://circleci.com/gh/ad2games/easybill-rest-client/tree/master)
 
 A client library for the Easybill REST API, generated using
 [swagger-codegen](https://github.com/swagger-api/swagger-codegen).
