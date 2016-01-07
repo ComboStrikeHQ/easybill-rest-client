@@ -172,7 +172,7 @@ module Easybill
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -238,7 +238,7 @@ module Easybill
       post_body = @api_client.object_to_http_body(body)
       
 
-      auth_names = []
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:PUT, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -299,7 +299,7 @@ module Easybill
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['basicAuth']
       data, status_code, headers = @api_client.call_api(:DELETE, path,
         :header_params => header_params,
         :query_params => query_params,
