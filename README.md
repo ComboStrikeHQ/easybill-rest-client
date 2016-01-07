@@ -7,3 +7,8 @@ In order to (re-)generate the library, run `script/generate`, which will
 run the generator and put the result into `tmp/easybill-rest-client`. 
 The version number and a few other configuration options for the
 generator can be found in `config.json`.
+
+## TODO
+
+* Add more integration tests
+* Add usage information
