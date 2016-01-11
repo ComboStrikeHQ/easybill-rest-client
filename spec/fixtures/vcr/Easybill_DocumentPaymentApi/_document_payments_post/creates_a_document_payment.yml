@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.easybill.de/rest/v1/document-payments
+    body:
+      encoding: UTF-8
+      string: '{"document_id":61145172,"amount":1,"payment_at":"2016-01-11 14:17:31
+        +0100"}'
+    headers:
+      User-Agent:
+      - ruby-swagger-0.0.1
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic easybill-basic-auth-key
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.8.0
+      Date:
+      - Mon, 11 Jan 2016 13:17:32 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"amount":1,"document_id":61145172,"id":53744398,"notice":null,"payment_at":"2016-01-11","type":null}'
+    http_version: 
+  recorded_at: Mon, 11 Jan 2016 13:17:32 GMT
+recorded_with: VCR 3.0.1
