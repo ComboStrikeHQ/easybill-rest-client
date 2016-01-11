@@ -33,4 +33,12 @@ RSpec.describe Easybill::DocumentApi, :vcr do
       expect(document.size).to eq(168583)
     end
   end
+
+  describe '#documents_id_send_type_post' do
+    it 'sends an email' do
+      expect do
+        subject.documents_id_send_type_post(61145172, 'email', {})
+      end.to_not raise_error
+    end
+  end
 end
