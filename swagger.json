@@ -70,6 +70,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -242,6 +249,13 @@
                     {
                         "in": "query",
                         "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
                         "required": false,
                         "type": "integer",
                         "format": "int64"
@@ -486,6 +500,13 @@
                     {
                         "in": "query",
                         "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
                         "required": false,
                         "type": "integer",
                         "format": "int64"
@@ -807,6 +828,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1122,6 +1150,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1284,6 +1319,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1443,6 +1485,13 @@
                     {
                         "in": "query",
                         "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
                         "required": false,
                         "type": "integer",
                         "format": "int64"
@@ -1609,6 +1658,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1771,6 +1827,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1930,6 +1993,13 @@
                     {
                         "in": "query",
                         "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
                         "required": false,
                         "type": "integer",
                         "format": "int64"
@@ -2128,6 +2198,13 @@
                     {
                         "in": "query",
                         "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
                         "required": false,
                         "type": "integer",
                         "format": "int64"

@@ -16,6 +16,7 @@ module Easybill
     # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
     # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
     # @option opts [Integer] :page 
+    # @option opts [Integer] :limit 
     # @return [Documents]
     def documents_get(opts = {})
       data, status_code, headers = documents_get_with_http_info(opts)
@@ -30,6 +31,7 @@ module Easybill
     # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
     # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
     # @option opts [Integer] :page 
+    # @option opts [Integer] :limit 
     # @return [Array<(Documents, Fixnum, Hash)>] Documents data, response status code and response headers
     def documents_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -54,6 +56,7 @@ module Easybill
       query_params[:'customer_id'] = opts[:'customer_id'] if opts[:'customer_id']
       query_params[:'document_date'] = opts[:'document_date'] if opts[:'document_date']
       query_params[:'page'] = opts[:'page'] if opts[:'page']
+      query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
 
       # header parameters
       header_params = {}

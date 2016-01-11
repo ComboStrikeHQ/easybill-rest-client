@@ -12,6 +12,7 @@ module Easybill
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
+    # @option opts [Integer] :limit 
     # @return [TimeTrackings]
     def time_trackings_get(opts = {})
       data, status_code, headers = time_trackings_get_with_http_info(opts)
@@ -22,6 +23,7 @@ module Easybill
     # 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
+    # @option opts [Integer] :limit 
     # @return [Array<(TimeTrackings, Fixnum, Hash)>] TimeTrackings data, response status code and response headers
     def time_trackings_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -34,6 +36,7 @@ module Easybill
       # query parameters
       query_params = {}
       query_params[:'page'] = opts[:'page'] if opts[:'page']
+      query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
 
       # header parameters
       header_params = {}
