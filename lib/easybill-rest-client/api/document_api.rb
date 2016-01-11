@@ -461,7 +461,7 @@ module Easybill
     # 
     # @param id ID of document
     # @param [Hash] opts the optional parameters
-    # @return [binary]
+    # @return [File]
     def documents_id_pdf_get(id, opts = {})
       data, status_code, headers = documents_id_pdf_get_with_http_info(id, opts)
       return data
@@ -471,7 +471,7 @@ module Easybill
     # 
     # @param id ID of document
     # @param [Hash] opts the optional parameters
-    # @return [Array<(binary, Fixnum, Hash)>] binary data, response status code and response headers
+    # @return [Array<(File, Fixnum, Hash)>] File data, response status code and response headers
     def documents_id_pdf_get_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DocumentApi#documents_id_pdf_get ..."
@@ -511,7 +511,7 @@ module Easybill
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'binary')
+        :return_type => 'File')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DocumentApi#documents_id_pdf_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

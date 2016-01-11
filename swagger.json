@@ -779,7 +779,7 @@
                     "200": {
                         "description": "Successful operation",
                         "schema": {
-                            "type": "string",
+                            "type": "file",
                             "format": "binary"
                         }
                     },
