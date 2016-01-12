@@ -9,6 +9,12 @@ RSpec.describe Easybill::DocumentApi, :vcr do
       expect(documents.items.count).to eq(1)
       expect(documents.items.first.number).to eq('201610032')
     end
+
+    it 'returns documents by number' do
+      documents = subject.documents_get(number: '201610032')
+      expect(documents.items.count).to eq(1)
+      expect(documents.items.first.number).to eq('201610032')
+    end
   end
 
   describe '#documents_post' do

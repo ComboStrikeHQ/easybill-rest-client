@@ -15,6 +15,7 @@ module Easybill
     # @option opts [String] :is_draft Filter documents by draft flag.
     # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
     # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
+    # @option opts [String] :number Filter documents by number.
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
     # @return [Documents]
@@ -30,6 +31,7 @@ module Easybill
     # @option opts [String] :is_draft Filter documents by draft flag.
     # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
     # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
+    # @option opts [String] :number Filter documents by number.
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
     # @return [Array<(Documents, Fixnum, Hash)>] Documents data, response status code and response headers
@@ -55,6 +57,7 @@ module Easybill
       query_params[:'is_draft'] = opts[:'is_draft'] if opts[:'is_draft']
       query_params[:'customer_id'] = opts[:'customer_id'] if opts[:'customer_id']
       query_params[:'document_date'] = opts[:'document_date'] if opts[:'document_date']
+      query_params[:'number'] = opts[:'number'] if opts[:'number']
       query_params[:'page'] = opts[:'page'] if opts[:'page']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
 

@@ -499,6 +499,13 @@
                     },
                     {
                         "in": "query",
+                        "name": "number",
+                        "description": "Filter documents by number.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
                         "name": "page",
                         "required": false,
                         "type": "integer",
