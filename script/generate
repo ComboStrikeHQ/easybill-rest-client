@@ -10,10 +10,12 @@ SOURCE_DIR="$BUILD_DIR/$GEM_NAME"
 TARGET_DIR="$TEMP_DIR/$GEM_NAME"
 
 [ -e $TARGET_DIR ] && rm -r $TARGET_DIR
-[ -e $BUILD_DIR ] && rm -r $BUILD_DIR
+mkdir -p $TEMP_DIR
 
-mkdir -p $BUILD_DIR
-git clone https://github.com/swagger-api/swagger-codegen $BUILD_DIR
+if [ ! -e $BUILD_DIR ]
+then
+  git clone https://github.com/swagger-api/swagger-codegen $BUILD_DIR
+fi
 cp config.json $BUILD_DIR
 cp swagger.json $BUILD_DIR
 cd $BUILD_DIR
