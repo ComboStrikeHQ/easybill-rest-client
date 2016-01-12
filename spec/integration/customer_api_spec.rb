@@ -8,6 +8,12 @@ RSpec.describe Easybill::CustomerApi, :vcr do
       customers = subject.customers_get
       expect(customers.items).to be_any
     end
+
+    it 'returns customers by number' do
+      customers = subject.customers_get(number: 154085)
+      expect(customers.items.count).to eq(1)
+      expect(customers.items.first.number).to eq('154085')
+    end
   end
 
   describe '#customers_id_get' do

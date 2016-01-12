@@ -13,6 +13,7 @@ module Easybill
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
+    # @option opts [String] :number Filter customers by number.
     # @return [Customers]
     def customers_get(opts = {})
       data, status_code, headers = customers_get_with_http_info(opts)
@@ -24,6 +25,7 @@ module Easybill
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
+    # @option opts [String] :number Filter customers by number.
     # @return [Array<(Customers, Fixnum, Hash)>] Customers data, response status code and response headers
     def customers_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -37,6 +39,7 @@ module Easybill
       query_params = {}
       query_params[:'page'] = opts[:'page'] if opts[:'page']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
+      query_params[:'number'] = opts[:'number'] if opts[:'number']
 
       # header parameters
       header_params = {}

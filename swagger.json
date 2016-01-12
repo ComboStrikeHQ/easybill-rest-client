@@ -77,6 +77,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "number",
+                        "description": "Filter customers by number.",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
