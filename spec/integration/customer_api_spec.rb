@@ -29,4 +29,11 @@ RSpec.describe Easybill::CustomerApi, :vcr do
       expect(customer.id).to eq(51374354)
     end
   end
+
+  describe '#customers_id_put' do
+    it 'updates a customer' do
+      subject.customers_id_put(16314756, emails: ['user@example.com'])
+      expect(subject.customers_id_get(16314756).emails).to eq(['user@example.com'])
+    end
+  end
 end
