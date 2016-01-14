@@ -47,4 +47,12 @@ RSpec.describe Easybill::DocumentApi, :vcr do
       end.to_not raise_error
     end
   end
+
+  describe '#documents_id_done_put' do
+    it 'marks a drafted document as finished' do
+      expect(subject.documents_id_get(62331327).number).to be(nil)
+      subject.documents_id_done_put(62331327)
+      expect(subject.documents_id_get(62331327).number).to eq('201610037')
+    end
+  end
 end

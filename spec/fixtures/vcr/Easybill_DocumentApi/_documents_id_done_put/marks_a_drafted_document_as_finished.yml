@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.easybill.de/rest/v1/documents/62331327
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - ruby-swagger-0.0.1
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic easybill-basic-auth-key
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.8.0
+      Date:
+      - Thu, 14 Jan 2016 10:48:34 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"address":{"city":null,"company_name":"Affiliate Test 1","country":null,"first_name":null,"last_name":null,"personal":false,"salutation":"0","street":null,"title":null,"zip_code":null},"amount":210000,"amount_net":210000,"bank_debit_form":null,"cash_allowance":null,"cash_allowance_days":null,"cash_allowance_text":null,"contact_id":null,"contact_label":"Test","contact_text":"1234","created_at":"2016-01-14
+        11:41:14","currency":"EUR","customer_id":13188599,"discount":null,"discount_type":null,"document_date":"2015-12-31","due_date":null,"edited_at":"2016-01-14
+        11:41:15","grace_period":10,"id":62331327,"is_archive":false,"is_draft":true,"items":[{"booking_account":null,"cost_price_charge":null,"cost_price_charge_type":null,"cost_price_net":null,"cost_price_total":null,"description":"APB
+        Reloaded NO SOI","discount":null,"discount_type":null,"export_cost_1":null,"export_cost_2":null,"id":127464252,"number":null,"position":1,"position_id":null,"quantity":1000,"serial_number":null,"serial_number_id":null,"single_price_gross":210,"single_price_net":210,"total_price_gross":210000,"total_price_net":210000,"total_vat":0,"type":"POSITION","unit":"conv","vat_percent":19}],"label_address":{"city":null,"company_name":"Affiliate
+        Test 1","country":null,"first_name":null,"last_name":null,"personal":null,"salutation":"0","street":null,"zip_code":null},"last_postbox_id":null,"number":null,"paid_amount":0,"paid_at":null,"pdf_pages":1,"pdf_template":"EN","project_id":null,"ref_id":null,"service_date":{"type":"DEFAULT","date":"2015-12-31","date_from":null,"date_to":null,"text":null},"status":null,"text":"USt-IdNr:
+        %KUNDE.USTID%","text_prefix":"Your VAT ID: %kunde.ustid%","title":null,"type":"INVOICE","vat_option":"sStfr"}'
+    http_version: 
+  recorded_at: Thu, 14 Jan 2016 10:48:34 GMT
+- request:
+    method: put
+    uri: https://api.easybill.de/rest/v1/documents/62331327/done
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - ruby-swagger-0.0.1
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic easybill-basic-auth-key
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.8.0
+      Date:
+      - Thu, 14 Jan 2016 10:48:34 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"address":{"city":null,"company_name":"Affiliate Test 1","country":null,"first_name":null,"last_name":null,"personal":false,"salutation":"0","street":null,"title":null,"zip_code":null},"amount":210000,"amount_net":210000,"bank_debit_form":null,"cash_allowance":null,"cash_allowance_days":null,"cash_allowance_text":null,"contact_id":null,"contact_label":"Test","contact_text":"1234","created_at":"2016-01-14
+        11:41:14","currency":"EUR","customer_id":13188599,"discount":null,"discount_type":null,"document_date":"2015-12-31","due_date":"2016-01-10","edited_at":"2016-01-14
+        11:48:34","grace_period":10,"id":62331327,"is_archive":false,"is_draft":false,"items":[{"booking_account":null,"cost_price_charge":null,"cost_price_charge_type":null,"cost_price_net":null,"cost_price_total":null,"description":"APB
+        Reloaded NO SOI","discount":null,"discount_type":null,"export_cost_1":null,"export_cost_2":null,"id":127464252,"number":null,"position":1,"position_id":null,"quantity":1000,"serial_number":null,"serial_number_id":null,"single_price_gross":210,"single_price_net":210,"total_price_gross":210000,"total_price_net":210000,"total_vat":0,"type":"POSITION","unit":"conv","vat_percent":19}],"label_address":{"city":null,"company_name":"Affiliate
+        Test 1","country":null,"first_name":null,"last_name":null,"personal":null,"salutation":"0","street":null,"zip_code":null},"last_postbox_id":null,"number":"201610037","paid_amount":0,"paid_at":null,"pdf_pages":1,"pdf_template":"EN","project_id":null,"ref_id":null,"service_date":{"type":"DEFAULT","date":"2015-12-31","date_from":null,"date_to":null,"text":null},"status":null,"text":"USt-IdNr:
+        %KUNDE.USTID%","text_prefix":"Your VAT ID: %kunde.ustid%","title":null,"type":"INVOICE","vat_option":"sStfr"}'
+    http_version: 
+  recorded_at: Thu, 14 Jan 2016 10:48:34 GMT
+- request:
+    method: get
+    uri: https://api.easybill.de/rest/v1/documents/62331327
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - ruby-swagger-0.0.1
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Basic easybill-basic-auth-key
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.8.0
+      Date:
+      - Thu, 14 Jan 2016 10:48:34 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"address":{"city":null,"company_name":"Affiliate Test 1","country":null,"first_name":null,"last_name":null,"personal":false,"salutation":"0","street":null,"title":null,"zip_code":null},"amount":210000,"amount_net":210000,"bank_debit_form":null,"cash_allowance":null,"cash_allowance_days":null,"cash_allowance_text":null,"contact_id":null,"contact_label":"Test","contact_text":"1234","created_at":"2016-01-14
+        11:41:14","currency":"EUR","customer_id":13188599,"discount":null,"discount_type":null,"document_date":"2015-12-31","due_date":"2016-01-10","edited_at":"2016-01-14
+        11:48:34","grace_period":10,"id":62331327,"is_archive":false,"is_draft":false,"items":[{"booking_account":null,"cost_price_charge":null,"cost_price_charge_type":null,"cost_price_net":null,"cost_price_total":null,"description":"APB
+        Reloaded NO SOI","discount":null,"discount_type":null,"export_cost_1":null,"export_cost_2":null,"id":127464252,"number":null,"position":1,"position_id":null,"quantity":1000,"serial_number":null,"serial_number_id":null,"single_price_gross":210,"single_price_net":210,"total_price_gross":210000,"total_price_net":210000,"total_vat":0,"type":"POSITION","unit":"conv","vat_percent":19}],"label_address":{"city":null,"company_name":"Affiliate
+        Test 1","country":null,"first_name":null,"last_name":null,"personal":null,"salutation":"0","street":null,"zip_code":null},"last_postbox_id":null,"number":"201610037","paid_amount":0,"paid_at":null,"pdf_pages":1,"pdf_template":"EN","project_id":null,"ref_id":null,"service_date":{"type":"DEFAULT","date":"2015-12-31","date_from":null,"date_to":null,"text":null},"status":null,"text":"USt-IdNr:
+        %KUNDE.USTID%","text_prefix":"Your VAT ID: %kunde.ustid%","title":null,"type":"INVOICE","vat_option":"sStfr"}'
+    http_version: 
+  recorded_at: Thu, 14 Jan 2016 10:48:34 GMT
+recorded_with: VCR 3.0.1
