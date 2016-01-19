@@ -183,7 +183,8 @@ module Easybill
       # close and delete temp file
       tmp_file.close!
 
-      File.open(path, 'w') { |file| file.write(response.body) }
+      # DO NOT REMOVE! The `b` was added manually to avoid encoding issues.
+      File.open(path, 'wb') { |file| file.write(response.body) }
       @config.logger.info "File written to #{path}. Please move the file to a proper folder "\
                           "for further processing and delete the temp afterwards"
       File.new(path)
