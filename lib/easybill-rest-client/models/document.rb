@@ -68,6 +68,9 @@ module Easybill
     # Reference document id
     attr_accessor :ref_id
 
+    # This object is only available in document type INVOICE or CREDIT
+    attr_accessor :service_date
+
     attr_accessor :status
 
     attr_accessor :text
@@ -148,6 +151,8 @@ module Easybill
         
         :'ref_id' => :'ref_id',
         
+        :'service_date' => :'service_date',
+        
         :'status' => :'status',
         
         :'text' => :'text',
@@ -198,6 +203,7 @@ module Easybill
         :'project_id' => :'String',
         :'recurring_options' => :'DocumentRecurring',
         :'ref_id' => :'Integer',
+        :'service_date' => :'ServiceDate',
         :'status' => :'String',
         :'text' => :'String',
         :'text_prefix' => :'String',
@@ -345,6 +351,10 @@ module Easybill
         self.ref_id = attributes[:'ref_id']
       end
       
+      if attributes[:'service_date']
+        self.service_date = attributes[:'service_date']
+      end
+      
       if attributes[:'status']
         self.status = attributes[:'status']
       end
@@ -416,6 +426,7 @@ module Easybill
           project_id == o.project_id &&
           recurring_options == o.recurring_options &&
           ref_id == o.ref_id &&
+          service_date == o.service_date &&
           status == o.status &&
           text == o.text &&
           text_prefix == o.text_prefix &&
@@ -431,7 +442,7 @@ module Easybill
 
     # Calculate hash code according to all attributes.
     def hash
-      [address, label_address, amount, amount_net, bank_debit_form, cash_allowance, cash_allowance_days, cash_allowance_text, contact_id, contact_label, contact_text, created_at, currency, customer_id, discount, discount_type, document_date, due_date, edited_at, grace_period, id, is_archive, is_draft, items, number, paid_amount, paid_at, pdf_pages, pdf_template, project_id, recurring_options, ref_id, status, text, text_prefix, title, type, vat_option].hash
+      [address, label_address, amount, amount_net, bank_debit_form, cash_allowance, cash_allowance_days, cash_allowance_text, contact_id, contact_label, contact_text, created_at, currency, customer_id, discount, discount_type, document_date, due_date, edited_at, grace_period, id, is_archive, is_draft, items, number, paid_amount, paid_at, pdf_pages, pdf_template, project_id, recurring_options, ref_id, service_date, status, text, text_prefix, title, type, vat_option].hash
     end
 
     # build the object from hash

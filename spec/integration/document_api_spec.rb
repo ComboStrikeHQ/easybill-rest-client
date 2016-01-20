@@ -34,7 +34,7 @@ RSpec.describe Easybill::DocumentApi, :vcr do
   describe '#documents_id_pdf_get' do
     it 'returns a PDF' do
       document = subject.documents_id_pdf_get(61145172)
-      expect(document.class).to be(File)
+      expect(document.class).to be(Tempfile)
       expect(File.exist?(document.path)).to be(true)
       expect(document.size).to eq(168583)
     end

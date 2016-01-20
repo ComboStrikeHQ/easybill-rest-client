@@ -1,11 +1,7 @@
 require 'date'
 
 module Easybill
-  class PostBox
-    attr_accessor :id
-
-    attr_accessor :document_id
-
+  class PostBoxRequest
     attr_accessor :to
 
     attr_accessor :cc
@@ -18,27 +14,9 @@ module Easybill
 
     attr_accessor :date
 
-    attr_accessor :created_at
-
-    attr_accessor :processed_at
-
-    attr_accessor :send_by_self
-
-    attr_accessor :send_with_attachment
-
-    attr_accessor :type
-
-    attr_accessor :status
-
-    attr_accessor :status_info
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        
-        :'id' => :'id',
-        
-        :'document_id' => :'document_id',
         
         :'to' => :'to',
         
@@ -50,21 +28,7 @@ module Easybill
         
         :'message' => :'message',
         
-        :'date' => :'date',
-        
-        :'created_at' => :'created_at',
-        
-        :'processed_at' => :'processed_at',
-        
-        :'send_by_self' => :'send_by_self',
-        
-        :'send_with_attachment' => :'send_with_attachment',
-        
-        :'type' => :'type',
-        
-        :'status' => :'status',
-        
-        :'status_info' => :'status_info'
+        :'date' => :'date'
         
       }
     end
@@ -72,21 +36,12 @@ module Easybill
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'document_id' => :'Integer',
         :'to' => :'String',
         :'cc' => :'String',
         :'from' => :'String',
         :'subject' => :'String',
         :'message' => :'String',
-        :'date' => :'Date',
-        :'created_at' => :'DateTime',
-        :'processed_at' => :'DateTime',
-        :'send_by_self' => :'BOOLEAN',
-        :'send_with_attachment' => :'BOOLEAN',
-        :'type' => :'String',
-        :'status' => :'String',
-        :'status_info' => :'String'
+        :'date' => :'Date'
         
       }
     end
@@ -97,14 +52,6 @@ module Easybill
       # convert string to symbol for hash key
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
-      
-      if attributes[:'id']
-        self.id = attributes[:'id']
-      end
-      
-      if attributes[:'document_id']
-        self.document_id = attributes[:'document_id']
-      end
       
       if attributes[:'to']
         self.to = attributes[:'to']
@@ -130,73 +77,18 @@ module Easybill
         self.date = attributes[:'date']
       end
       
-      if attributes[:'created_at']
-        self.created_at = attributes[:'created_at']
-      end
-      
-      if attributes[:'processed_at']
-        self.processed_at = attributes[:'processed_at']
-      end
-      
-      if attributes[:'send_by_self']
-        self.send_by_self = attributes[:'send_by_self']
-      end
-      
-      if attributes[:'send_with_attachment']
-        self.send_with_attachment = attributes[:'send_with_attachment']
-      end
-      
-      if attributes[:'type']
-        self.type = attributes[:'type']
-      end
-      
-      if attributes[:'status']
-        self.status = attributes[:'status']
-      end
-      
-      if attributes[:'status_info']
-        self.status_info = attributes[:'status_info']
-      end
-      
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    def type=(type)
-      allowed_values = ["FAX", "MAIL", "POST"]
-      if type && !allowed_values.include?(type)
-        fail "invalid value for 'type', must be one of #{allowed_values}"
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    def status=(status)
-      allowed_values = ["WAITING", "PREPARE", "ERROR", "OK", "PROCESSING"]
-      if status && !allowed_values.include?(status)
-        fail "invalid value for 'status', must be one of #{allowed_values}"
-      end
-      @status = status
     end
 
     # Check equality by comparing each attribute.
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          document_id == o.document_id &&
           to == o.to &&
           cc == o.cc &&
           from == o.from &&
           subject == o.subject &&
           message == o.message &&
-          date == o.date &&
-          created_at == o.created_at &&
-          processed_at == o.processed_at &&
-          send_by_self == o.send_by_self &&
-          send_with_attachment == o.send_with_attachment &&
-          type == o.type &&
-          status == o.status &&
-          status_info == o.status_info
+          date == o.date
     end
 
     # @see the `==` method
@@ -206,7 +98,7 @@ module Easybill
 
     # Calculate hash code according to all attributes.
     def hash
-      [id, document_id, to, cc, from, subject, message, date, created_at, processed_at, send_by_self, send_with_attachment, type, status, status_info].hash
+      [to, cc, from, subject, message, date].hash
     end
 
     # build the object from hash

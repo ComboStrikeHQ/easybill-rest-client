@@ -13,7 +13,14 @@ module Easybill
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
-    # @option opts [String] :number Filter customers by number.
+    # @option opts [String] :group_id Filter customers by group_id. You can add multiple group ids separate by comma like id,id,id.
+    # @option opts [String] :number Filter customers by number. You can add multiple numbers separate by comma like no,no,no.
+    # @option opts [String] :country Filter customers by country. You can add multiple countries separate by comma like DE,PL,FR.
+    # @option opts [String] :zip_code Filter customers by zip_code. You can add multiple zip codes separate by comma like zip,zip,zip.
+    # @option opts [String] :emails Filter customers by emails. You can add multiple emails separate by comma like mail,mail,mail.
+    # @option opts [String] :first_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
+    # @option opts [String] :last_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
+    # @option opts [String] :company_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
     # @return [Customers]
     def customers_get(opts = {})
       data, status_code, headers = customers_get_with_http_info(opts)
@@ -25,7 +32,14 @@ module Easybill
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
-    # @option opts [String] :number Filter customers by number.
+    # @option opts [String] :group_id Filter customers by group_id. You can add multiple group ids separate by comma like id,id,id.
+    # @option opts [String] :number Filter customers by number. You can add multiple numbers separate by comma like no,no,no.
+    # @option opts [String] :country Filter customers by country. You can add multiple countries separate by comma like DE,PL,FR.
+    # @option opts [String] :zip_code Filter customers by zip_code. You can add multiple zip codes separate by comma like zip,zip,zip.
+    # @option opts [String] :emails Filter customers by emails. You can add multiple emails separate by comma like mail,mail,mail.
+    # @option opts [String] :first_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
+    # @option opts [String] :last_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
+    # @option opts [String] :company_name Filter customers by first_name. You can add multiple names separate by comma like name,name,name.
     # @return [Array<(Customers, Fixnum, Hash)>] Customers data, response status code and response headers
     def customers_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -39,7 +53,14 @@ module Easybill
       query_params = {}
       query_params[:'page'] = opts[:'page'] if opts[:'page']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
+      query_params[:'group_id'] = opts[:'group_id'] if opts[:'group_id']
       query_params[:'number'] = opts[:'number'] if opts[:'number']
+      query_params[:'country'] = opts[:'country'] if opts[:'country']
+      query_params[:'zip_code'] = opts[:'zip_code'] if opts[:'zip_code']
+      query_params[:'emails'] = opts[:'emails'] if opts[:'emails']
+      query_params[:'first_name'] = opts[:'first_name'] if opts[:'first_name']
+      query_params[:'last_name'] = opts[:'last_name'] if opts[:'last_name']
+      query_params[:'company_name'] = opts[:'company_name'] if opts[:'company_name']
 
       # header parameters
       header_params = {}

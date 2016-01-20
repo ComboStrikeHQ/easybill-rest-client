@@ -80,8 +80,57 @@
                     },
                     {
                         "in": "query",
+                        "name": "group_id",
+                        "description": "Filter customers by group_id. You can add multiple group ids separate by comma like id,id,id.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
                         "name": "number",
-                        "description": "Filter customers by number.",
+                        "description": "Filter customers by number. You can add multiple numbers separate by comma like no,no,no.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "country",
+                        "description": "Filter customers by country. You can add multiple countries separate by comma like DE,PL,FR.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "zip_code",
+                        "description": "Filter customers by zip_code. You can add multiple zip codes separate by comma like zip,zip,zip.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "emails",
+                        "description": "Filter customers by emails. You can add multiple emails separate by comma like mail,mail,mail.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "first_name",
+                        "description": "Filter customers by first_name. You can add multiple names separate by comma like name,name,name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "last_name",
+                        "description": "Filter customers by first_name. You can add multiple names separate by comma like name,name,name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "company_name",
+                        "description": "Filter customers by first_name. You can add multiple names separate by comma like name,name,name.",
                         "required": false,
                         "type": "string"
                     }
@@ -458,6 +507,42 @@
                 ],
                 "summary": "Fetch documents list",
                 "parameters": [
+				    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "description": "Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "INVOICE",
+                            "RECURRING",
+                            "CREDIT",
+                            "OFFER",
+                            "REMINDER",
+                            "DUNNING",
+                            "STORNO",
+                            "DELIVERY",
+                            "PDF",
+                            "CHARGE",
+                            "CHARGE_CONFIRM",
+                            "LETTER",
+                            "ORDER"
+                        ]
+                    },
                     {
                         "in": "query",
                         "name": "type",
@@ -493,6 +578,17 @@
                     },
                     {
                         "in": "query",
+                        "name": "is_archive",
+                        "description": "Filter documents by archive flag.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "0",
+                            "1"
+                        ]
+                    },
+                    {
+                        "in": "query",
                         "name": "customer_id",
                         "description": "Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.",
                         "required": false,
@@ -500,30 +596,38 @@
                     },
                     {
                         "in": "query",
+                        "name": "project_id",
+                        "description": "Filter documents by project_id. You can add multiple project_id separate by comma like id,id,id.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
                         "name": "document_date",
                         "description": "Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.",
+                        "required": false,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "paid_at",
+                        "description": "Filter documents by paid_at. You can filter one date with paid_at=2014-12-10 or between like 2015-01-01,2015-12-31. With paid_at=null you get all unpaid documents.",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "in": "query",
+                        "name": "title",
+                        "description": "Filter documents by title.",
+                        "type": "string",
+                        "required": false
                     },
                     {
                         "in": "query",
                         "name": "number",
                         "description": "Filter documents by number.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "page",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
+                        "type": "string",
+                        "required": false
                     }
                 ],
                 "responses": {
@@ -772,7 +876,7 @@
                         "name": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/PostBox"
+                            "$ref": "#/definitions/PostBoxRequest"
                         }
                     }
                 ],
@@ -2323,12 +2427,122 @@
                     "404": {
                         "description": "Not found"
                     }
+
                 },
                 "security": [
                     {
                         "basicAuth": []
                     }
                 ]
+            }
+        },
+        "/post-boxes": {
+            "get": {
+                "tags": [
+                    "post box"
+                ],
+                "summary": "Fetch post box list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "description": "Filter post boxes by type. Multiple typs seperate with , like type=EMAIL,FAX.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "EMAIL",
+                            "FAX",
+                            "POST"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "status",
+                        "description": "Filter post boxes by status.",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "WAITING",
+                            "PREPARE",
+                            "ERROR",
+                            "OK",
+                            "PROCESSING"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "document_id",
+                        "description": "Filter post boxes by document_id. You can add multiple document ids separate by comma like id,id,id.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PostBoxes"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/post-boxes/{id}": {
+            "get": {
+                "tags": [
+                    "post box"
+                ],
+                "summary": "Fetch post box",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post box",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/PostBox"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "post box"
+                ],
+                "summary": "Delete post box",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of post box",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
             }
         }
     },
@@ -2901,6 +3115,35 @@
                 }
             }
         },
+        "ServiceDate": {
+            "type": "object",
+            "description": "Type DEFAULT print the message: 'Invoice date coincides with the time of supply'. The other like: 'type: date or period or text'",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "DEFAULT",
+                        "SERVICE",
+                        "DELIVERY"
+                    ]
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "date_from": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "date_to": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
         "Document": {
             "type": "object",
             "properties": {
@@ -3015,6 +3258,11 @@
                     "type": "integer",
                     "format": "int64",
                     "description": "Reference document id"
+                },
+                "service_date": {
+                    "type": "object",
+                    "$ref": "#/definitions/ServiceDate",
+                    "description": "This object is only available in document type INVOICE or CREDIT"
                 },
                 "status": {
                     "type": "string"
@@ -3596,7 +3844,7 @@
                 }
             ]
         },
-        "PostBox": {
+        "PostBoxRequest": {
             "type": "object",
             "properties": {
                 "to": {
@@ -3619,6 +3867,91 @@
                     "format": "date"
                 }
             }
+        },
+        "PostBox": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "document_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "to": {
+                    "type": "string"
+                },
+                "cc": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "processed_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "send_by_self": {
+                    "type": "boolean"
+                },
+                "send_with_attachment": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "FAX",
+                        "MAIL",
+                        "POST"
+                    ]
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "WAITING",
+                        "PREPARE",
+                        "ERROR",
+                        "OK",
+                        "PROCESSING"
+                    ]
+                },
+                "status_info": {
+                    "type": "string"
+                }
+            }
+        },
+        "PostBoxes": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/List"
+                },
+                {
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PostBox"
+                            }
+                        }
+                    }
+                }
+            ]
         }
     }
 }

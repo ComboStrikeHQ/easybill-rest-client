@@ -11,13 +11,18 @@ module Easybill
     # Fetch documents list
     # 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
-    # @option opts [String] :is_draft Filter documents by draft flag.
-    # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
-    # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
-    # @option opts [String] :number Filter documents by number.
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
+    # @option opts [String] :type Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
+    # @option opts [String] :type2 Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
+    # @option opts [String] :is_draft Filter documents by draft flag.
+    # @option opts [String] :is_archive Filter documents by archive flag.
+    # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
+    # @option opts [String] :project_id Filter documents by project_id. You can add multiple project_id separate by comma like id,id,id.
+    # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
+    # @option opts [String] :paid_at Filter documents by paid_at. You can filter one date with paid_at=2014-12-10 or between like 2015-01-01,2015-12-31. With paid_at=null you get all unpaid documents.
+    # @option opts [String] :title Filter documents by title.
+    # @option opts [String] :number Filter documents by number.
     # @return [Documents]
     def documents_get(opts = {})
       data, status_code, headers = documents_get_with_http_info(opts)
@@ -27,13 +32,18 @@ module Easybill
     # Fetch documents list
     # 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :type Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
-    # @option opts [String] :is_draft Filter documents by draft flag.
-    # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
-    # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
-    # @option opts [String] :number Filter documents by number.
     # @option opts [Integer] :page 
     # @option opts [Integer] :limit 
+    # @option opts [String] :type Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
+    # @option opts [String] :type2 Filter documents by type. Multiple typs seperate with , like type=INVOICE,CREDIT.
+    # @option opts [String] :is_draft Filter documents by draft flag.
+    # @option opts [String] :is_archive Filter documents by archive flag.
+    # @option opts [String] :customer_id Filter documents by customer_id. You can add multiple customer_is separate by comma like id,id,id.
+    # @option opts [String] :project_id Filter documents by project_id. You can add multiple project_id separate by comma like id,id,id.
+    # @option opts [String] :document_date Filter documents by document_date. You can filter one date with document_date=2014-12-10 or between like 2015-01-01,2015-12-31.
+    # @option opts [String] :paid_at Filter documents by paid_at. You can filter one date with paid_at=2014-12-10 or between like 2015-01-01,2015-12-31. With paid_at=null you get all unpaid documents.
+    # @option opts [String] :title Filter documents by title.
+    # @option opts [String] :number Filter documents by number.
     # @return [Array<(Documents, Fixnum, Hash)>] Documents data, response status code and response headers
     def documents_get_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -44,8 +54,16 @@ module Easybill
         fail 'invalid value for "type", must be one of INVOICE, RECURRING, CREDIT, OFFER, REMINDER, DUNNING, STORNO, DELIVERY, PDF, CHARGE, CHARGE_CONFIRM, LETTER, ORDER'
       end
       
+      if opts[:'type2'] && !['INVOICE', 'RECURRING', 'CREDIT', 'OFFER', 'REMINDER', 'DUNNING', 'STORNO', 'DELIVERY', 'PDF', 'CHARGE', 'CHARGE_CONFIRM', 'LETTER', 'ORDER'].include?(opts[:'type2'])
+        fail 'invalid value for "type2", must be one of INVOICE, RECURRING, CREDIT, OFFER, REMINDER, DUNNING, STORNO, DELIVERY, PDF, CHARGE, CHARGE_CONFIRM, LETTER, ORDER'
+      end
+      
       if opts[:'is_draft'] && !['0', '1'].include?(opts[:'is_draft'])
         fail 'invalid value for "is_draft", must be one of 0, 1'
+      end
+      
+      if opts[:'is_archive'] && !['0', '1'].include?(opts[:'is_archive'])
+        fail 'invalid value for "is_archive", must be one of 0, 1'
       end
       
       # resource path
@@ -53,13 +71,18 @@ module Easybill
 
       # query parameters
       query_params = {}
-      query_params[:'type'] = opts[:'type'] if opts[:'type']
-      query_params[:'is_draft'] = opts[:'is_draft'] if opts[:'is_draft']
-      query_params[:'customer_id'] = opts[:'customer_id'] if opts[:'customer_id']
-      query_params[:'document_date'] = opts[:'document_date'] if opts[:'document_date']
-      query_params[:'number'] = opts[:'number'] if opts[:'number']
       query_params[:'page'] = opts[:'page'] if opts[:'page']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
+      query_params[:'type'] = opts[:'type'] if opts[:'type']
+      query_params[:'type'] = opts[:'type2'] if opts[:'type2']
+      query_params[:'is_draft'] = opts[:'is_draft'] if opts[:'is_draft']
+      query_params[:'is_archive'] = opts[:'is_archive'] if opts[:'is_archive']
+      query_params[:'customer_id'] = opts[:'customer_id'] if opts[:'customer_id']
+      query_params[:'project_id'] = opts[:'project_id'] if opts[:'project_id']
+      query_params[:'document_date'] = opts[:'document_date'] if opts[:'document_date']
+      query_params[:'paid_at'] = opts[:'paid_at'] if opts[:'paid_at']
+      query_params[:'title'] = opts[:'title'] if opts[:'title']
+      query_params[:'number'] = opts[:'number'] if opts[:'number']
 
       # header parameters
       header_params = {}
