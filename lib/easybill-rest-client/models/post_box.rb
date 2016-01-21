@@ -162,7 +162,7 @@ module Easybill
 
     # Custom attribute writer method checking allowed values (enum).
     def type=(type)
-      allowed_values = ["FAX", "MAIL", "POST"]
+      allowed_values = ["FAX", "EMAIL", "POST"]
       if type && !allowed_values.include?(type)
         fail "invalid value for 'type', must be one of #{allowed_values}"
       end
