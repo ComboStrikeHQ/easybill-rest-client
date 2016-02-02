@@ -36,4 +36,14 @@ RSpec.describe Easybill::CustomerApi, :vcr do
       expect(subject.customers_id_get(16314756).emails).to eq(['user@example.com'])
     end
   end
+
+  describe '#customers_id_delete' do
+    it 'deletes a customer' do
+      expect(subject.customers_id_get(16314756)).to_not be(nil)
+      subject.customers_id_delete(16314756)
+      expect do
+        expect(subject.customers_id_get(16314756)).to be(nil)
+      end.to raise_error(Easybill::ApiError, 'Not Found')
+    end
+  end
 end
