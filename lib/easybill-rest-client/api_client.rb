@@ -7,6 +7,9 @@ require 'uri'
 
 module Easybill
   class ApiClient
+    API_LIMIT_PERIOD_SECS = 60
+    API_LIMIT_COUNT = 60
+
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
 
@@ -34,7 +37,17 @@ module Easybill
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
       request = build_request(http_method, path, opts)
-      response = request.run
+      response = begin
+                   block_if_api_limit_reached
+                   request.run
+                 rescue Easybill::ApiError => e
+                   if e.message[/Too Many Requests/]
+                     puts 'Too many requests, retrying...'
+                     retry
+                   else
+                     raise
+                   end
+                 end
 
       if @config.debugging
         @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
@@ -53,6 +66,27 @@ module Easybill
         data = nil
       end
       return data, response.code, response.headers
+    end
+
+    def block_if_api_limit_reached
+      oldest_request_at = request_times[API_LIMIT_COUNT - 1]
+      puts "request_times.count => #{request_times.count}"
+
+      if oldest_request_at
+        time_since_oldest_request = Time.now - oldest_request_at
+        if time_since_oldest_request < API_LIMIT_PERIOD_SECS
+          sleep_time = (API_LIMIT_PERIOD_SECS - time_since_oldest_request).to_i + 1
+          puts "API limit reached, sleeping #{sleep_time}s"
+          sleep sleep_time
+        end
+      end
+
+      request_times.unshift(Time.now)
+      request_times.replace(request_times[0, API_LIMIT_COUNT])
+    end
+
+    def request_times
+      @request_times ||= []
     end
 
     def build_request(http_method, path, opts = {})
