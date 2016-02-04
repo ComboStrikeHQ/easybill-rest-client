@@ -91,6 +91,16 @@ module Easybill
 
     attr_accessor :force_ending_format
 
+    # Sets the time the client sleeps after a "Too Many Requests" error
+    # was received.
+    # Default to 30.
+    attr_accessor :retry_cool_off_time
+
+    # Sets the number of tries for "Too Many Requests" errors before
+    # giving up.
+    # Default to 10.
+    attr_accessor :tries
+
     def initialize
       @scheme = 'https'
       @host = 'api.easybill.de'
@@ -105,6 +115,8 @@ module Easybill
       @inject_format = false
       @force_ending_format = false
       @logger = defined?(Rails) ? Rails.logger : Logger.new(STDOUT)
+      @tries = 10
+      @retry_cool_off_time = 30
 
       yield(self) if block_given?
     end

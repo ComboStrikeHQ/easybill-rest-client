@@ -17,7 +17,7 @@ RSpec.describe Easybill::DocumentPaymentApi, :vcr do
     it 'creates a document payment' do
       payment = subject.document_payments_post(document_id: 61145172,
                                                amount: 1,
-                                               payment_at: Time.new(2016, 1, 11, 14, 17, 31))
+                                               payment_at: Time.utc(2016, 1, 11, 14, 17, 31))
       expect(payment).to have_attributes(
         id: 53744398,
         document_id: 61145172,

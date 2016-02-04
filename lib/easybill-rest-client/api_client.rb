@@ -4,6 +4,7 @@ require 'logger'
 require 'tempfile'
 require 'typhoeus'
 require 'uri'
+require 'retryable'
 
 module Easybill
   class ApiClient
@@ -54,6 +55,17 @@ module Easybill
       end
       return data, response.code, response.headers
     end
+
+    def call_api_retrying(*args)
+      Retryable.retryable(:tries => @config.tries,
+                          :sleep => @config.retry_cool_off_time,
+                          :on => Easybill::ApiError,
+                          :matching => /Too Many Requests/
+                         ) { original_call_api(*args) }
+    end
+
+    alias_method :original_call_api, :call_api
+    alias_method :call_api, :call_api_retrying
 
     def build_request(http_method, path, opts = {})
       url = build_request_url(path)

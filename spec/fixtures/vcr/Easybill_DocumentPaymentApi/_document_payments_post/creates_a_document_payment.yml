@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"document_id":61145172,"amount":1,"payment_at":"2016-01-11 14:17:31
-        +0100"}'
+        UTC"}'
     headers:
       User-Agent:
       - ruby-swagger-0.0.1
