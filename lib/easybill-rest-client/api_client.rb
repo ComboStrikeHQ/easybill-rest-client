@@ -4,6 +4,7 @@ require 'logger'
 require 'tempfile'
 require 'typhoeus'
 require 'uri'
+require 'retryable'
 
 module Easybill
   class ApiClient
@@ -33,26 +34,33 @@ module Easybill
     # @return [Array<(Object, Fixnum, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
-      request = build_request(http_method, path, opts)
-      response = request.run
+      Retryable.retryable(
+        :tries => 10,
+        :sleep => 30,
+        :on => Easybill::ApiError,
+        :matching => /Too Many Requests/
+      ) do |r|
+        request = build_request(http_method, path, opts)
+        response = request.run
 
-      if @config.debugging
-        @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
-      end
+        if @config.debugging
+          @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
+        end
 
-      unless response.success?
-        fail ApiError.new(:code => response.code,
-                          :response_headers => response.headers,
-                          :response_body => response.body),
-             response.status_message
-      end
+        unless response.success?
+          fail ApiError.new(:code => response.code,
+                            :response_headers => response.headers,
+                            :response_body => response.body),
+                            response.status_message
+        end
 
-      if opts[:return_type]
-        data = deserialize(response, opts[:return_type])
-      else
-        data = nil
+        if opts[:return_type]
+          data = deserialize(response, opts[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
       end
-      return data, response.code, response.headers
     end
 
     def build_request(http_method, path, opts = {})
