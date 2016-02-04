@@ -1,4 +1,16 @@
 RSpec.describe Easybill::ApiClient do
+  subject do
+    described_class.new(config)
+  end
+
+  let(:config) do
+    c = Easybill::Configuration.new
+    c.retry_cool_off_time = 0
+    c
+  end
+
+  let(:request) { instance_double('Typhoeus::Request') }
+
   context 'too many requests have been sent' do
     let(:too_many_requests) do
       instance_double('Typhoeus::Response', :code => 429,
@@ -14,13 +26,7 @@ RSpec.describe Easybill::ApiClient do
                                             :success? => true)
     end
 
-    let(:request) { instance_double('Typhoeus::Request') }
-
     it 'retries api calls that return a "Too Many Requests" error' do
-      allow(Retryable).to receive(:retryable).and_wrap_original do |m, opts, &block|
-        m.call(opts.merge(:sleep => 0), &block)
-      end
-
       allow(subject).to receive(:build_request).and_return(request)
 
       expect(request).to receive(:run).and_return(too_many_requests)

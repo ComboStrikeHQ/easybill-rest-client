@@ -36,7 +36,7 @@ module Easybill
     def call_api(http_method, path, opts = {})
       Retryable.retryable(
         :tries => 10,
-        :sleep => 30,
+        :sleep => @config.retry_cool_off_time,
         :on => Easybill::ApiError,
         :matching => /Too Many Requests/
       ) do |r|

@@ -2,6 +2,8 @@ require 'uri'
 
 module Easybill
   class Configuration
+    DEFAULT_RETRY_COOL_OFF_TIME = 30
+
     # Defines url scheme
     attr_accessor :scheme
 
@@ -91,6 +93,11 @@ module Easybill
 
     attr_accessor :force_ending_format
 
+    # Sets the time the client sleeps after a "Too Many Requests" error
+    # was received.
+    # Default to 30.
+    attr_writer :retry_cool_off_time
+
     def initialize
       @scheme = 'https'
       @host = 'api.easybill.de'
@@ -165,6 +172,10 @@ module Easybill
             value: basic_auth_token
           },
       }
+    end
+
+    def retry_cool_off_time
+      @retry_cool_off_time || DEFAULT_RETRY_COOL_OFF_TIME
     end
   end
 end
