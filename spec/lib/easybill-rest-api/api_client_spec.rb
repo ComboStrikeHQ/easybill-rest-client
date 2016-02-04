@@ -21,8 +21,8 @@ RSpec.describe Easybill::ApiClient do
     end
     let(:ok) do
       instance_double('Typhoeus::Response', :code => 200,
-                                            :headers => {},
-                                            :body => 'DATADATADATA',
+                                            :headers => { 'Foo' => 'bar' },
+                                            :body => '{"foo":"bar"}',
                                             :success? => true)
     end
 
@@ -32,7 +32,9 @@ RSpec.describe Easybill::ApiClient do
       expect(request).to receive(:run).and_return(too_many_requests)
       expect(request).to receive(:run).and_return(ok)
 
-      expect(subject.call_api(:get, '/')).to eq([nil, 200, {}])
+      expect(
+        subject.call_api(:get, '/', { :return_type => 'Object' })
+      ).to eq([{ :foo => 'bar' }, 200, { 'Foo' => 'bar' }])
     end
   end
 end
