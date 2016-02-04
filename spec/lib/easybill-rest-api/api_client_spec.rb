@@ -4,9 +4,9 @@ RSpec.describe Easybill::ApiClient do
   end
 
   let(:config) do
-    c = Easybill::Configuration.new
-    c.retry_cool_off_time = 0
-    c
+    Easybill::Configuration.new do |c|
+      c.retry_cool_off_time = 0
+    end
   end
 
   let(:request) { instance_double('Typhoeus::Request') }
