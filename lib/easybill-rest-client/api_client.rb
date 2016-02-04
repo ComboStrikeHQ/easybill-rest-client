@@ -34,34 +34,38 @@ module Easybill
     # @return [Array<(Object, Fixnum, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
-      Retryable.retryable(
-        :tries => 10,
-        :sleep => @config.retry_cool_off_time,
-        :on => Easybill::ApiError,
-        :matching => /Too Many Requests/
-      ) do |r|
-        request = build_request(http_method, path, opts)
-        response = request.run
+      request = build_request(http_method, path, opts)
+      response = request.run
 
-        if @config.debugging
-          @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
-        end
-
-        unless response.success?
-          fail ApiError.new(:code => response.code,
-                            :response_headers => response.headers,
-                            :response_body => response.body),
-                            response.status_message
-        end
-
-        if opts[:return_type]
-          data = deserialize(response, opts[:return_type])
-        else
-          data = nil
-        end
-        return data, response.code, response.headers
+      if @config.debugging
+        @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
       end
+
+      unless response.success?
+        fail ApiError.new(:code => response.code,
+                          :response_headers => response.headers,
+                          :response_body => response.body),
+             response.status_message
+      end
+
+      if opts[:return_type]
+        data = deserialize(response, opts[:return_type])
+      else
+        data = nil
+      end
+      return data, response.code, response.headers
     end
+
+    def call_api_retrying(*args)
+      Retryable.retryable(:tries => 10,
+                          :sleep => @config.retry_cool_off_time,
+                          :on => Easybill::ApiError,
+                          :matching => /Too Many Requests/
+                         ) { original_call_api(*args) }
+    end
+
+    alias_method :original_call_api, :call_api
+    alias_method :call_api, :call_api_retrying
 
     def build_request(http_method, path, opts = {})
       url = build_request_url(path)
