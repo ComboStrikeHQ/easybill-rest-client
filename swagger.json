@@ -2326,6 +2326,13 @@
                         "required": false,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "document_id",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
