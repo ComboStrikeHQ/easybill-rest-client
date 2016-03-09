@@ -18,7 +18,7 @@ require 'typhoeus'
 require 'uri'
 require 'retryable'
 
-module Easybill
+module EasybillRestClient
   class ApiClient
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
@@ -71,7 +71,7 @@ module Easybill
     def call_api_retrying(*args)
       Retryable.retryable(:tries => @config.tries,
                           :sleep => @config.retry_cool_off_time,
-                          :on => Easybill::ApiError,
+                          :on => EasybillRestClient::ApiError,
                           :matching => /Too Many Requests/
                          ) { original_call_api(*args) }
     end
@@ -174,7 +174,7 @@ module Easybill
         # parse date time (expecting ISO 8601 format)
         Date.parse data
       when 'Object'
-        # generic object, return directly
+        # generic object (usually a Hash), return directly
         data
       when /\AArray<(.+)>\z/
         # e.g. Array<Pet>
@@ -188,7 +188,7 @@ module Easybill
         end
       else
         # models, e.g. Pet
-        Easybill.const_get(return_type).new.tap do |model|
+        EasybillRestClient.const_get(return_type).new.tap do |model|
           model.build_from_hash data
         end
       end

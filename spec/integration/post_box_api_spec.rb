@@ -1,4 +1,4 @@
-RSpec.describe Easybill::PostBoxApi, :vcr do
+RSpec.describe EasybillRestClient::PostBoxApi, :vcr do
   subject do
     described_class.new(api_client)
   end

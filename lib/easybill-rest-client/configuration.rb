@@ -1,6 +1,6 @@
 require 'uri'
 
-module Easybill
+module EasybillRestClient
   class Configuration
     # Defines url scheme
     attr_accessor :scheme

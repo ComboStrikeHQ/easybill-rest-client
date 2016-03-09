@@ -1,10 +1,10 @@
-RSpec.describe Easybill::DocumentPaymentApi, :vcr do
+RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
   subject do
     described_class.new(api_client)
   end
 
   let(:document_api) do
-    Easybill::DocumentApi.new(api_client)
+    EasybillRestClient::DocumentApi.new(api_client)
   end
 
   let(:document) do

@@ -1,10 +1,10 @@
-RSpec.describe Easybill::ApiClient do
+RSpec.describe EasybillRestClient::ApiClient do
   subject do
     described_class.new(config)
   end
 
   let(:config) do
-    Easybill::Configuration.new do |c|
+    EasybillRestClient::Configuration.new do |c|
       c.retry_cool_off_time = 0
     end
   end

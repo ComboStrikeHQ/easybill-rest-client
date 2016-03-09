@@ -1,7 +1,7 @@
 module SetupDocument
   def setup_finished_document(opts = {})
-    customer_api = Easybill::CustomerApi.new(api_client)
-    document_api = Easybill::DocumentApi.new(api_client)
+    customer_api = EasybillRestClient::CustomerApi.new(api_client)
+    document_api = EasybillRestClient::DocumentApi.new(api_client)
 
     unless opts[:customer_id]
       customer_number = 'test-123'
