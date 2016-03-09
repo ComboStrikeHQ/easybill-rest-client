@@ -4,7 +4,7 @@ require "easybill-rest-client/version"
 
 Gem::Specification.new do |s|
   s.name        = "easybill-rest-client"
-  s.version     = Easybill::VERSION
+  s.version     = EasybillRestClient::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Zeke Sikelianos", "Tony Tam"]
   s.email       = ["zeke@wordnik.com", "fehguy@gmail.com"]

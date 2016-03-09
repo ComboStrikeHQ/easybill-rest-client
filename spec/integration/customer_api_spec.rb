@@ -1,4 +1,4 @@
-RSpec.describe Easybill::CustomerApi, :vcr do
+RSpec.describe EasybillRestClient::CustomerApi, :vcr do
   subject do
     described_class.new(api_client)
   end
@@ -43,7 +43,7 @@ RSpec.describe Easybill::CustomerApi, :vcr do
       subject.customers_id_delete(16314756)
       expect do
         expect(subject.customers_id_get(16314756)).to be(nil)
-      end.to raise_error(Easybill::ApiError, 'Not Found')
+      end.to raise_error(EasybillRestClient::ApiError, 'Not Found')
     end
   end
 end
