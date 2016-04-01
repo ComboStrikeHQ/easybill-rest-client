@@ -3,11 +3,12 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     described_class.new(api_client)
   end
 
-  describe '#documents_get' do
+  describe '#find_all' do
     it 'returns documents' do
-      documents = subject.documents_get(type: 'INVOICE')
-      expect(documents.items.count).to eq(1)
-      expect(documents.items.first.number).to eq('201610032')
+      documents = subject.find_all(type: 'INVOICE')
+      binding.pry
+      expect(documents.count).to eq(1)
+      expect(documents.first.number).to eq('201610032')
     end
 
     it 'returns documents by number' do
