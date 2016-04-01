@@ -35,3 +35,8 @@ docker run -it \
             chmod 777 -R .
 
 rm -rf $BUILD_DIR
+
+cp -r tmp/easybill-rest-client/lib/ .
+git add lib
+git commit -m 'Re-generate'
+git cherry-pick 0c65f414 eb60d96f
