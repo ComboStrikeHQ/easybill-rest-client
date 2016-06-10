@@ -42,12 +42,11 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     end
   end
 
-  describe '#documents_id_pdf_get' do
+  describe '#get_pdf' do
     it 'returns a PDF' do
       document = subject.get_pdf(84718807)
-      expect(document.class).to be(Tempfile)
-      expect(File.exist?(document.path)).to be(true)
-      expect(document.size).to eq(168583)
+      expect(document).to be_a(String)
+      expect(document).to start_with('%PDF-1.4')
     end
   end
 

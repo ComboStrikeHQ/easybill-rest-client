@@ -23,7 +23,12 @@ module EasybillRestClient
           req.params = params
         end
       end
-      response_body = JSON.parse(response.body, symbolize_names: true)
+      response_body =
+        if response.headers['content-type'] == 'application/json'
+          JSON.parse(response.body, symbolize_names: true)
+        else
+          response.body
+        end
       unless response.status.to_s.start_with?('2')
         raise ApiError, response_body[:message]
       end
