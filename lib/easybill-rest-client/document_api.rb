@@ -13,12 +13,12 @@ module EasybillRestClient
       api_client.request_collection(:get, '/documents', params).map { |d| build_document(d) }
     end
 
-    def save(document)
-      if document.id
-        build_document(api_client.request(:put, "/documents/#{document.id}", document.attributes))
-      else
-        build_document(api_client.request(:post, '/documents', document.attributes))
-      end
+    def create(document)
+      build_document(api_client.request(:post, '/documents', document.attributes))
+    end
+
+    def update(document)
+      build_document(api_client.request(:put, "/documents/#{document.id}", document.attributes))
     end
 
     def get_pdf(document_id)
