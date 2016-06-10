@@ -6,8 +6,8 @@ require 'easybill-rest-client/post_box_api'
 
 module EasybillRestClient
   class Client
-    def initialize(api_key)
-      @api_key = api_key
+    def initialize(options = {})
+      @options = options
     end
 
     def customers
@@ -28,10 +28,10 @@ module EasybillRestClient
 
     private
 
-    attr_reader :api_key
+    attr_reader :options
 
     def api_client
-      @api_client ||= ApiClient.new(api_key: api_key)
+      @api_client ||= ApiClient.new(options)
     end
   end
 end

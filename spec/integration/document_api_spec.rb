@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   subject do
-    described_class.new(api_client)
+    client.documents
   end
 
   describe '#find' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 RSpec.describe EasybillRestClient::PostBoxApi, :vcr do
   subject do
-    described_class.new(api_client)
+    client.post_boxes
   end
 
   describe '#find_all' do

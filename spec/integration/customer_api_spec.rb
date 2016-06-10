@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 module EasybillRestClient
   RSpec.describe CustomerApi, :vcr do
-    let(:client) { Client.new(ENV['EASYBILL_API_KEY']) }
     let(:api) { client.customers }
 
     describe 'a list of customers' do
