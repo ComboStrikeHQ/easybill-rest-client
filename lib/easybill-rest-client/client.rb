@@ -21,6 +21,10 @@ module EasybillRestClient
       @document_api ||= PostBoxApi.new(api_client)
     end
 
+    def document_payments
+      @document_payments ||= DocumentPaymentApi.new(api_client)
+    end
+
     private
 
     attr_reader :api_key

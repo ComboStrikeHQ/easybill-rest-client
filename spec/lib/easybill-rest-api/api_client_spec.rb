@@ -26,7 +26,7 @@ RSpec.describe EasybillRestClient::ApiClient do
                                             :success? => true)
     end
 
-    it 'retries api calls that return a "Too Many Requests" error' do
+    pending 'retries api calls that return a "Too Many Requests" error' do
       allow(subject).to receive(:build_request).and_return(request)
 
       expect(request).to receive(:run).and_return(too_many_requests)
