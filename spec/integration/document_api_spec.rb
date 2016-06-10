@@ -63,4 +63,13 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
       expect(subject.find(84725627).number).to be_a(String)
     end
   end
+
+  describe '#delete' do
+    it 'deletes a document' do
+      expect(subject.find(84718807)).not_to be_nil
+      subject.delete(84718807)
+      expect { subject.find(84718807) }
+        .to raise_error(EasybillRestClient::ApiError, 'Document#84718807 not found.')
+    end
+  end
 end
