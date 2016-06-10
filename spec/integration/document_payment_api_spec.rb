@@ -34,10 +34,10 @@ RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
 
   describe '#create' do
     let(:document_payment) do
-      EasybillRestClient::DocumentPayment.new(document_id: 84730384,
-                                              amount: 3367,
-                                              notice: 'Unicorns and rainbows!',
-                                              type: 'Überweisung')
+      subject.build(document_id: 84730384,
+                    amount: 3367,
+                    notice: 'Unicorns and rainbows!',
+                    type: 'Überweisung')
     end
 
     it 'creates a document payment' do

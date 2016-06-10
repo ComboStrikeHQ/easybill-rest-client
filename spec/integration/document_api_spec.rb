@@ -32,7 +32,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
 
   describe '#create' do
     it 'creates a document' do
-      document = subject.create(EasybillRestClient::Document.new(number: 'Y'))
+      document = subject.create(subject.build(number: 'Y'))
       expect(document.id).to eq(79126074)
       expect(document.number).to eq('Y')
     end
@@ -40,7 +40,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
 
   describe '#update' do
     it 'updates a document' do
-      subject.update(EasybillRestClient::Document.new(id: 79125727, number: 'Z'))
+      subject.update(subject.build(id: 79125727, number: 'Z'))
       expect(subject.find(79125727).number).to eq('Z')
     end
   end
