@@ -12,6 +12,10 @@ module EasybillRestClient
       build_post_box(api_client.request(:get, "/post-boxes/#{post_box_id}"))
     end
 
+    def delete(post_box_id)
+      api_client.request(:delete, "/post-boxes/#{post_box_id}")
+    end
+
     private
 
     attr_reader :api_client

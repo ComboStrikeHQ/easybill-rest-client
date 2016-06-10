@@ -19,4 +19,13 @@ RSpec.describe EasybillRestClient::PostBoxApi, :vcr do
       expect(post_box.id).to be_a(Fixnum)
     end
   end
+
+  describe '#delete' do
+    it 'deletes a post box' do
+      subject.find(58942178)
+      subject.delete(58942178)
+      expect { subject.find(58942178) }
+        .to raise_error(EasybillRestClient::ApiError, 'PostBox#58942178 not found.')
+    end
+  end
 end
