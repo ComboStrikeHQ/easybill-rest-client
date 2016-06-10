@@ -50,11 +50,9 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     end
   end
 
-  describe '#documents_id_send_type_post' do
+  describe '#send_email' do
     it 'sends an email' do
-      expect do
-        subject.documents_id_send_type_post(61145172, 'email', {})
-      end.to_not raise_error
+      expect(subject.send_email(84718807)).to be_nil
     end
   end
 

@@ -24,6 +24,10 @@ module EasybillRestClient
       api_client.request(:get, "/documents/#{document_id}/pdf")
     end
 
+    def send_email(document_id)
+      api_client.request(:post, "/documents/#{document_id}/send/email")
+    end
+
     private
 
     attr_reader :api_client

@@ -32,7 +32,7 @@ module EasybillRestClient
       unless response.status.to_s.start_with?('2')
         raise ApiError, response_body[:message]
       end
-      response_body
+      response_body.length > 0 ? response_body : nil
     end
 
     private
