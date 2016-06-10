@@ -13,17 +13,13 @@ Gem::Specification.new do |s|
   s.description = %q{This gem maps to a swagger API}
   s.license     = "Apache-2.0"
 
-  s.add_runtime_dependency 'faraday'
-  s.add_runtime_dependency 'virtus'
-  s.add_runtime_dependency 'retryable'
+  s.add_runtime_dependency 'faraday', '~> 0.9'
+  s.add_runtime_dependency 'virtus', '~> 1.0'
+  s.add_runtime_dependency 'retryable', '~> 2.0'
 
-  s.add_development_dependency 'rspec', '~> 3.2', '>= 3.2.0'
-  s.add_development_dependency 'vcr', '~> 2.9', '>= 2.9.3'
-  s.add_development_dependency 'webmock', '~> 1.6', '>= 1.6.2'
-  s.add_development_dependency 'autotest', '~> 4.4', '>= 4.4.6'
-  s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
-  s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
-  s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.10'
+  s.add_development_dependency 'rspec', '~> 3.4'
+  s.add_development_dependency 'vcr', '~> 3.0'
+  s.add_development_dependency 'webmock', '~> 2.1'
   s.add_development_dependency 'pry'
 
   s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
