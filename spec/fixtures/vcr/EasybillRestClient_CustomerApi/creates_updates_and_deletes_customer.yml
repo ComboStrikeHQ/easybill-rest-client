@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:43 GMT
+      - Fri, 10 Jun 2016 14:57:33 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -62,13 +62,13 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"page":1,"pages":0,"limit":1000,"total":0,"items":[]}'
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:43 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:33 GMT
 - request:
     method: post
     uri: https://api.easybill.de/rest/v1/customers
     body:
       encoding: UTF-8
-      string: '{"number":"TEST","company_name":"Fake","first_name":"John","last_name":"Doe"}'
+      string: '{"company_name":"Fake","emails":[],"first_name":"John","last_name":"Doe","number":"TEST"}'
     headers:
       User-Agent:
       - Faraday v0.9.2
@@ -88,7 +88,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:43 GMT
+      - Fri, 10 Jun 2016 14:57:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -122,15 +122,15 @@ http_interactions:
         *.facebook.com; object-src ''self'''
     body:
       encoding: UTF-8
-      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"John","grace_period":null,"group_id":null,"id":70306042,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"John","grace_period":null,"group_id":null,"id":70311371,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:43 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:34 GMT
 - request:
     method: put
-    uri: https://api.easybill.de/rest/v1/customers/70306042
+    uri: https://api.easybill.de/rest/v1/customers/70311371
     body:
       encoding: UTF-8
-      string: '{"first_name":"Bob"}'
+      string: '{"cash_allowance_days":"0","company_name":"Fake","country":"DE","delivery_salutation":"0","emails":[],"first_name":"Bob","id":70311371,"last_name":"Doe","number":"TEST","personal":false,"salutation":"0","sepa_mandate_reference":"TEST"}'
     headers:
       User-Agent:
       - Faraday v0.9.2
@@ -150,7 +150,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:43 GMT
+      - Fri, 10 Jun 2016 14:57:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -187,12 +187,12 @@ http_interactions:
         *.facebook.com; object-src ''self'''
     body:
       encoding: ASCII-8BIT
-      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":0,"cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70306042,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":0,"cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70311371,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:43 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:34 GMT
 - request:
     method: get
-    uri: https://api.easybill.de/rest/v1/customers/70306042
+    uri: https://api.easybill.de/rest/v1/customers/70311371
     body:
       encoding: US-ASCII
       string: ''
@@ -213,7 +213,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:44 GMT
+      - Fri, 10 Jun 2016 14:57:34 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -250,12 +250,12 @@ http_interactions:
         *.facebook.com; object-src ''self'''
     body:
       encoding: ASCII-8BIT
-      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70306042,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70311371,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:44 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:34 GMT
 - request:
     method: delete
-    uri: https://api.easybill.de/rest/v1/customers/70306042
+    uri: https://api.easybill.de/rest/v1/customers/70311371
     body:
       encoding: US-ASCII
       string: ''
@@ -276,7 +276,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:44 GMT
+      - Fri, 10 Jun 2016 14:57:34 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Connection:
@@ -310,7 +310,7 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:44 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:34 GMT
 - request:
     method: get
     uri: https://api.easybill.de/rest/v1/customers?limit=1000&number=TEST&page=1
@@ -334,7 +334,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 10 Jun 2016 13:34:44 GMT
+      - Fri, 10 Jun 2016 14:57:35 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -373,5 +373,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"page":1,"pages":0,"limit":1000,"total":0,"items":[]}'
     http_version: 
-  recorded_at: Fri, 10 Jun 2016 13:34:44 GMT
+  recorded_at: Fri, 10 Jun 2016 14:57:35 GMT
 recorded_with: VCR 3.0.3

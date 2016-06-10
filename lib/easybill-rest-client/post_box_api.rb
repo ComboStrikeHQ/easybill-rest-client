@@ -1,28 +1,24 @@
 # frozen_string_literal: true
+require 'easybill-rest-client/crud_operations'
+
 module EasybillRestClient
   class PostBoxApi
+    include CrudOperations
+
     def initialize(api_client)
       @api_client = api_client
-    end
-
-    def find_all(params = {})
-      api_client.request_collection(:get, '/post-boxes', params).map { |p| build_post_box(p) }
-    end
-
-    def find(post_box_id)
-      build_post_box(api_client.request(:get, "/post-boxes/#{post_box_id}"))
-    end
-
-    def delete(post_box_id)
-      api_client.request(:delete, "/post-boxes/#{post_box_id}")
     end
 
     private
 
     attr_reader :api_client
 
-    def build_post_box(params)
-      PostBox.new(params)
+    def resource_class
+      PostBox
+    end
+
+    def resource_name
+      'post-boxes'
     end
   end
 end
