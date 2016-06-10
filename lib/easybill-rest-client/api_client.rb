@@ -18,36 +18,48 @@ module EasybillRestClient
       end
     end
 
-    def request(method, endpoint, params = {}, body = nil)
+    def request(method, endpoint, params = {})
       Retryable.retryable(
         tries: tries,
         sleep: retry_cool_off_time,
         on: EasybillRestClient::TooManyRequests
       ) do
-        response = faraday.public_send(method) do |req|
-          req.url "#{base_path}#{endpoint}"
-          req.headers['Authorization'] = basic_auth_token
-          if %i(put post).include?(method)
-            req.body = params.reject { |_k, v| v.nil? }.to_json
-          else
-            req.params = params
-          end
-        end
-        raise TooManyRequests if response.status == 429
-        response_body =
-          if response.headers['content-type'] == 'application/json'
-            JSON.parse(response.body, symbolize_names: true)
-          else
-            response.body
-          end
-        unless response.status.to_s.start_with?('2')
-          raise ApiError, response_body[:message]
-        end
+        response = perform_request(method, endpoint, params)
+        response_body = process_response(response)
         response_body.length > 0 ? response_body : nil
       end
     end
 
     private
+
+    def perform_request(method, endpoint, params)
+      faraday.public_send(method) do |req|
+        req.url "#{base_path}#{endpoint}"
+        req.headers['Authorization'] = basic_auth_token
+        if %i(put post).include?(method)
+          req.body = params.reject { |_k, v| v.nil? }.to_json
+        else
+          req.params = params
+        end
+      end
+    end
+
+    def process_response(response)
+      raise TooManyRequests if response.status == 429
+      body = extract_response_body(response)
+      unless response.status.to_s.start_with?('2')
+        raise ApiError, body[:message]
+      end
+      body
+    end
+
+    def extract_response_body(response)
+      if response.headers['content-type'] == 'application/json'
+        JSON.parse(response.body, symbolize_names: true)
+      else
+        response.body
+      end
+    end
 
     def fetch_pages
       Enumerator.new do |y|
