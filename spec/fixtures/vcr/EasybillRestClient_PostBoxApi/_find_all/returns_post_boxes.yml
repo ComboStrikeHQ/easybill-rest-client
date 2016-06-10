@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.easybill.de/rest/v1/post-boxes?page=1&type=EMAIL
+    uri: https://api.easybill.de/rest/v1/post-boxes?limit=1000&page=1&type=EMAIL
     body:
       encoding: US-ASCII
       string: ''
@@ -68,6 +68,6 @@ http_interactions:
         freundlichen Gr\u00fc\u00dfen","processed_at":null,"send_by_self":false,"send_with_attachment":true,"status":"ERROR","status_msg":"Smtp
         Fehler. Bitte \u00fcberpr\u00fcfen Sie Ihre \u0022Eigener Mail-Server\u0022
         Einstellungen. (SMTP Error: Could not authenticate.)","subject":"Rechnung-%DOKUMENT.NUMMER%","to":"ns@ad2games.com","type":"EMAIL"}]}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 10 Jun 2016 09:29:44 GMT
 recorded_with: VCR 3.0.3

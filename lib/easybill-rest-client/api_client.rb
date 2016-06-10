@@ -5,6 +5,7 @@ module EasybillRestClient
     BASE_URL = 'https://api.easybill.de/rest/v1'
     DEFAULT_RETRY_COOL_OFF_TIME = 15
     DEFAULT_TRIES = 5
+    MAX_PAGE_SIZE = 1000
 
     def initialize(api_key:, retry_cool_off_time: DEFAULT_RETRY_COOL_OFF_TIME, tries: DEFAULT_TRIES)
       @api_key = api_key
@@ -14,7 +15,7 @@ module EasybillRestClient
 
     def request_collection(method, endpoint, params = {})
       fetch_pages do |page|
-        request(method, endpoint, params.merge(page: page))
+        request(method, endpoint, params.merge(page: page, limit: MAX_PAGE_SIZE))
       end
     end
 

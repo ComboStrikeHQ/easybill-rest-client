@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.easybill.de/rest/v1/document-payments?page=1
+    uri: https://api.easybill.de/rest/v1/document-payments?limit=1000&page=1
     body:
       encoding: US-ASCII
       string: ''
@@ -61,6 +61,6 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"page":1,"pages":1,"limit":100,"total":3,"items":[{"amount":2208,"document_id":80136851,"id":70458051,"notice":"","payment_at":"2016-05-13","type":null},{"amount":1800,"document_id":80022376,"id":71078047,"notice":"","payment_at":"2016-05-18","type":null},{"amount":3367,"document_id":84730384,"id":74692458,"notice":"Blah!","payment_at":"2016-06-10","type":"\u00dcberweisung"}]}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 10 Jun 2016 10:57:54 GMT
 recorded_with: VCR 3.0.3
