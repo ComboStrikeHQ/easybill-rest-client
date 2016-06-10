@@ -21,7 +21,8 @@ module EasybillRestClient
     end
 
     it 'creates, updates and deletes customer' do
-      if existing_customer = api.find_all(number: 'TEST').first
+      existing_customer = api.find_all(number: 'TEST').first
+      if existing_customer
         api.delete(existing_customer.id)
         expect(api.find_all(number: 'TEST').to_a).to be_empty
       end
