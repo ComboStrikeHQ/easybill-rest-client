@@ -1,10 +1,9 @@
-require 'pry'
 module EasybillRestClient
   class ApiClient
     BASE_URL = 'https://api.easybill.de/rest/v1'
 
-    def initialize(config = {})
-      @api_key = config.fetch(:api_key)
+    def initialize(api_key:)
+      @api_key = api_key
     end
 
     def request_collection(method, endpoint, params = {})
@@ -29,6 +28,7 @@ module EasybillRestClient
         else
           response.body
         end
+      raise TooManyRequests if response.status == 429
       unless response.status.to_s.start_with?('2')
         raise ApiError, response_body[:message]
       end
@@ -67,4 +67,5 @@ module EasybillRestClient
   end
 
   class ApiError < RuntimeError; end
+  class TooManyRequests < ApiError; end
 end
