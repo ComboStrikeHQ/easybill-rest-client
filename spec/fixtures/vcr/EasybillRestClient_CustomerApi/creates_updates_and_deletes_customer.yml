@@ -1,0 +1,365 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers?number=TEST&page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:53 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"pages":0,"limit":100,"total":0,"items":[]}'
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:53 GMT
+- request:
+    method: post
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers
+    body:
+      encoding: UTF-8
+      string: '{"number":"TEST","company_name":"Fake","first_name":"John","last_name":"Doe"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:53 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: UTF-8
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"John","grace_period":null,"group_id":null,"id":70298156,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:53 GMT
+- request:
+    method: put
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers/70298156
+    body:
+      encoding: UTF-8
+      string: '{"first_name":"Bob"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":0,"cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70298156,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:54 GMT
+- request:
+    method: get
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers/70298156
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":null,"company_name":"Fake","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":"Bob","grace_period":null,"group_id":null,"id":70298156,"info_1":null,"info_2":null,"internet":null,"last_name":"Doe","mobile":null,"note":null,"number":"TEST","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"TEST","since_date":null,"street":null,"suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":null}'
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:54 GMT
+- request:
+    method: delete
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers/70298156
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:54 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:54 GMT
+- request:
+    method: get
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers?number=TEST&page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:58:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"pages":0,"limit":100,"total":0,"items":[]}'
+    http_version: 
+  recorded_at: Fri, 10 Jun 2016 11:58:54 GMT
+recorded_with: VCR 2.9.3

@@ -4,8 +4,8 @@ module EasybillRestClient
       @api_client = api_client
     end
 
-    def find(id)
-      build_object(api_client.request(:get, "/customers/#{id}"))
+    def find(customer_id)
+      build_object(api_client.request(:get, "/customers/#{customer_id}"))
     end
 
     def find_all(params = {})
@@ -13,11 +13,15 @@ module EasybillRestClient
     end
 
     def create(params)
-      build_object(api_client.request(:put, "/customers/#{document.id}", params))
+      build_object(api_client.request(:post, '/customers', params))
     end
 
-    def update(params)
-      build_object(api_client.request(:post, '/customers', params))
+    def update(customer_id, params)
+      build_object(api_client.request(:put, "/customers/#{customer_id}", params))
+    end
+
+    def delete(customer_id)
+      api_client.request(:delete, "/customers/#{customer_id}")
     end
 
     private

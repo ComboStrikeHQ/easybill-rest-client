@@ -1,0 +1,82 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rest-api%40easybill.de:easybill-api-key@api.easybill.de/rest/v1/customers?page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 11:45:38 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"pages":1,"limit":5,"total":5,"items":[{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":"110058","company_name":"AdGaem
+        Marketing and Web Solutions LLP","country":"IN","delivery_city":"110058","delivery_company_name":"AdGaem
+        Marketing and Web Solutions LLP","delivery_country":"IN","delivery_first_name":"Tejprakash","delivery_last_name":"Dewangan","delivery_personal":null,"delivery_salutation":"0","delivery_street":"A-2\/154
+        Janakpuri","delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":"New
+        Delhi","emails":["info@adgaem.com"],"fax":null,"first_name":"Tejprakash","grace_period":"5","group_id":null,"id":5935320,"info_1":null,"info_2":null,"internet":null,"last_name":"Dewangan","mobile":null,"note":null,"number":"15408","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"15408","since_date":null,"street":"A-2\/154
+        Janakpuri","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":"New
+        Delhi"},{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":"Hamburg","company_name":"gamigo
+        AG","country":"DE","delivery_city":"Hamburg","delivery_company_name":"gamigo
+        AG","delivery_country":"DE","delivery_first_name":"Finance","delivery_last_name":"Team","delivery_personal":null,"delivery_salutation":"0","delivery_street":"Behringstr.
+        16b","delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":"22765","emails":["finance@gamigo.de"],"fax":null,"first_name":"Finance","grace_period":null,"group_id":null,"id":12500559,"info_1":null,"info_2":null,"internet":null,"last_name":"Team","mobile":null,"note":null,"number":"3","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"3","since_date":null,"street":"Behringstr.
+        16b","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":"22765"},{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":"Los
+        Angeles","company_name":"Affilate 4","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":null,"grace_period":null,"group_id":null,"id":12500560,"info_1":null,"info_2":null,"internet":null,"last_name":null,"mobile":null,"note":null,"number":"4","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"4","since_date":null,"street":"1234
+        W. Some Street","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":"90120"},{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":"Bamberg","company_name":"upjers
+        GmbH","country":"DE","delivery_city":"Bamberg","delivery_company_name":"upjers
+        GmbH","delivery_country":"DE","delivery_first_name":"Sebastian","delivery_last_name":"Pfaff","delivery_personal":null,"delivery_salutation":"0","delivery_street":"Hafenstr.
+        13","delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":"96052","emails":["s.pfaff@upjers.com"],"fax":null,"first_name":"Sebastian","grace_period":null,"group_id":null,"id":12500561,"info_1":null,"info_2":null,"internet":null,"last_name":"Pfaff","mobile":null,"note":null,"number":"5","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"5","since_date":null,"street":"Hafenstr.
+        13","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":"96052"},{"acquire_options":null,"bank_account":null,"bank_account_owner":null,"bank_bic":null,"bank_code":null,"bank_iban":null,"bank_name":null,"birth_date":null,"cash_allowance":null,"cash_allowance_days":"0","cash_discount":null,"cash_discount_type":null,"city":"Berlin","company_name":"Gigra
+        Game","country":"DE","delivery_city":null,"delivery_company_name":null,"delivery_country":null,"delivery_first_name":null,"delivery_last_name":null,"delivery_personal":null,"delivery_salutation":"0","delivery_street":null,"delivery_suffix_1":null,"delivery_suffix_2":null,"delivery_zip_code":null,"emails":[],"fax":null,"first_name":null,"grace_period":null,"group_id":null,"id":12500562,"info_1":null,"info_2":null,"internet":null,"last_name":null,"mobile":null,"note":null,"number":"6","payment_options":null,"personal":false,"phone_1":null,"phone_2":null,"postbox":null,"postbox_city":null,"postbox_country":null,"postbox_zip_code":null,"sale_price_level":null,"salutation":"0","sepa_agreement":null,"sepa_agreement_date":null,"sepa_mandate_reference":"6","since_date":null,"street":"Vulkanstr.
+        51","suffix_1":null,"suffix_2":null,"tax_number":null,"tax_options":null,"title":null,"vat_identifier":null,"zip_code":"10367"}]}'
+    http_version:
+  recorded_at: Fri, 10 Jun 2016 11:45:38 GMT
+recorded_with: VCR 2.9.3
