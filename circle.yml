@@ -5,4 +5,3 @@ dependencies:
   override:
     - bundle install
     - bundle exec rake rubocop
-    - bundle exec rspec
