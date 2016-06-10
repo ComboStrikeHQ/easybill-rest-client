@@ -31,4 +31,26 @@ RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
         .to raise_error(EasybillRestClient::ApiError, 'DocumentPayment#74692458 not found.')
     end
   end
+
+  describe '#create' do
+    let(:document_payment) do
+      EasybillRestClient::DocumentPayment.new(document_id: 84730384,
+                                              amount: 3367,
+                                              notice: 'Unicorns and rainbows!',
+                                              type: 'Überweisung')
+    end
+
+    it 'creates a document payment' do
+      payment = nil
+      expect do
+        payment = subject.create(document_payment)
+      end.to change { subject.find_all(document_id: 84730384).count }.by(1)
+      expect(payment).to have_attributes(
+        document_id: 84730384,
+        amount: 3367,
+        notice: 'Unicorns and rainbows!',
+        type: 'Überweisung'
+      )
+    end
+  end
 end

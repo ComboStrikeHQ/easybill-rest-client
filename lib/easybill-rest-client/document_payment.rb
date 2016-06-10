@@ -8,6 +8,5 @@ module EasybillRestClient
     attribute :notice, String
     attribute :payment_at, Date
     attribute :type, String
-    attribute :paid, Boolean
   end
 end

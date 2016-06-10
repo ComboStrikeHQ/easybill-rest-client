@@ -18,6 +18,12 @@ module EasybillRestClient
       api_client.request(:delete, "/document-payments/#{document_payment_id}")
     end
 
+    def create(document_payment)
+      build_document_payment(
+        api_client.request(:post, '/document-payments', document_payment.attributes)
+      )
+    end
+
     private
 
     attr_reader :api_client
