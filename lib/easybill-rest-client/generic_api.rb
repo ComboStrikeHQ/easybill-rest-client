@@ -1,6 +1,19 @@
 # frozen_string_literal: true
-module EasybillRestClient
-  module CrudOperations
+class GenericApi
+  def self.new(resource_name, resource_class)
+    Class.new do
+      include InstanceMethods
+
+      define_method(:resource_name) { resource_name }
+      define_method(:resource_class) { resource_class }
+    end
+  end
+
+  module InstanceMethods
+    def initialize(api_client)
+      @api_client = api_client
+    end
+
     def find(id)
       build(api_client.request(:get, "/#{resource_name}/#{id}"))
     end
@@ -24,5 +37,7 @@ module EasybillRestClient
     def build(params)
       resource_class.new(params)
     end
+
+    attr_reader :api_client
   end
 end

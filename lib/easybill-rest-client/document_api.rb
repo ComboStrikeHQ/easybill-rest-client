@@ -1,14 +1,8 @@
 # frozen_string_literal: true
-require 'easybill-rest-client/crud_operations'
+require 'easybill-rest-client/generic_api'
 
 module EasybillRestClient
-  class DocumentApi
-    include CrudOperations
-
-    def initialize(api_client)
-      @api_client = api_client
-    end
-
+  class DocumentApi < GenericApi.new('documents', Document)
     def get_pdf(document_id)
       api_client.request(:get, "/#{resource_name}/#{document_id}/pdf")
     end
@@ -23,18 +17,6 @@ module EasybillRestClient
 
     def cancel(document_id)
       build(api_client.request(:post, "/documents/#{document_id}/cancel"))
-    end
-
-    private
-
-    attr_reader :api_client
-
-    def resource_class
-      Document
-    end
-
-    def resource_name
-      'documents'
     end
   end
 end
