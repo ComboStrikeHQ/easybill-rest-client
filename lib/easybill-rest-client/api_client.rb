@@ -25,8 +25,7 @@ module EasybillRestClient
         on: EasybillRestClient::TooManyRequests
       ) do
         response = perform_request(method, endpoint, params)
-        response_body = process_response(response)
-        response_body.length > 0 ? response_body : nil
+        process_response(response)
       end
     end
 
@@ -50,7 +49,7 @@ module EasybillRestClient
       unless response.status.to_s.start_with?('2')
         raise ApiError, body[:message]
       end
-      body
+      body.length > 0 ? body : nil
     end
 
     def extract_response_body(response)
