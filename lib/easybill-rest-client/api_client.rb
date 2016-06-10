@@ -1,9 +1,15 @@
+require 'retryable'
+
 module EasybillRestClient
   class ApiClient
     BASE_URL = 'https://api.easybill.de/rest/v1'
+    DEFAULT_RETRY_COOL_OFF_TIME = 15
+    DEFAULT_TRIES = 5
 
-    def initialize(api_key:)
+    def initialize(api_key:, retry_cool_off_time: DEFAULT_RETRY_COOL_OFF_TIME, tries: DEFAULT_TRIES)
       @api_key = api_key
+      @retry_cool_off_time = retry_cool_off_time
+      @tries = tries
     end
 
     def request_collection(method, endpoint, params = {})
@@ -13,26 +19,32 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {}, body = nil)
-      response = faraday.public_send(method) do |req|
-        req.url "#{base_path}#{endpoint}"
-        req.headers['Authorization'] = basic_auth_token
-        if %i(put post).include?(method)
-          req.body = params.reject { |_k, v| v.nil? }.to_json
-        else
-          req.params = params
+      Retryable.retryable(
+        tries: tries,
+        sleep: retry_cool_off_time,
+        on: EasybillRestClient::TooManyRequests
+      ) do
+        response = faraday.public_send(method) do |req|
+          req.url "#{base_path}#{endpoint}"
+          req.headers['Authorization'] = basic_auth_token
+          if %i(put post).include?(method)
+            req.body = params.reject { |_k, v| v.nil? }.to_json
+          else
+            req.params = params
+          end
         end
-      end
-      response_body =
-        if response.headers['content-type'] == 'application/json'
-          JSON.parse(response.body, symbolize_names: true)
-        else
-          response.body
+        raise TooManyRequests if response.status == 429
+        response_body =
+          if response.headers['content-type'] == 'application/json'
+            JSON.parse(response.body, symbolize_names: true)
+          else
+            response.body
+          end
+        unless response.status.to_s.start_with?('2')
+          raise ApiError, response_body[:message]
         end
-      raise TooManyRequests if response.status == 429
-      unless response.status.to_s.start_with?('2')
-        raise ApiError, response_body[:message]
+        response_body.length > 0 ? response_body : nil
       end
-      response_body.length > 0 ? response_body : nil
     end
 
     private
@@ -63,7 +75,7 @@ module EasybillRestClient
       @faraday ||= Faraday.new(url: BASE_URL)
     end
 
-    attr_reader :api_key
+    attr_reader :api_key, :retry_cool_off_time, :tries
   end
 
   class ApiError < RuntimeError; end

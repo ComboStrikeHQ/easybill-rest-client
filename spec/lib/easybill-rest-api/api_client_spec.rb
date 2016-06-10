@@ -1,40 +1,32 @@
 RSpec.describe EasybillRestClient::ApiClient do
   subject do
-    described_class.new(config)
+    described_class.new(api_key: ENV['EASYBILL_API_KEY'], retry_cool_off_time: 0)
   end
 
-  let(:config) do
-    EasybillRestClient::Configuration.new do |c|
-      c.retry_cool_off_time = 0
-    end
-  end
+  let(:faraday) { instance_double(Faraday::Connection) }
 
-  let(:request) { instance_double('Typhoeus::Request') }
+  before do
+    allow(Faraday).to receive(:new).with(url: 'https://api.easybill.de/rest/v1')
+      .and_return(faraday)
+  end
 
   context 'too many requests have been sent' do
     let(:too_many_requests) do
-      instance_double('Typhoeus::Response', :code => 429,
-                                            :headers => {},
-                                            :body => '',
-                                            :success? => false,
-                                            :status_message => 'Too Many Requests')
+      double('response', status: 429, headers: {}, body: '')
     end
     let(:ok) do
-      instance_double('Typhoeus::Response', :code => 200,
-                                            :headers => { 'Foo' => 'bar' },
-                                            :body => '{"foo":"bar"}',
-                                            :success? => true)
+      double('response', status: 200,
+                         headers: { 'content-type' => 'application/json' },
+                         body: '{"foo":"bar"}')
     end
 
-    pending 'retries api calls that return a "Too Many Requests" error' do
-      allow(subject).to receive(:build_request).and_return(request)
-
-      expect(request).to receive(:run).and_return(too_many_requests)
-      expect(request).to receive(:run).and_return(ok)
+    it 'retries api calls that return a "Too Many Requests" error' do
+      expect(faraday).to receive(:get).and_return(too_many_requests)
+      expect(faraday).to receive(:get).and_return(ok)
 
       expect(
-        subject.call_api(:get, '/', { :return_type => 'Object' })
-      ).to eq([{ :foo => 'bar' }, 200, { 'Foo' => 'bar' }])
+        subject.request(:get, '/')
+      ).to eq({ :foo => 'bar' })
     end
   end
 end
