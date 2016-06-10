@@ -25,6 +25,14 @@ module EasybillRestClient
       api_client.request(:delete, "/customers/#{customer_id}")
     end
 
+    def save(customer)
+      if customer.id
+        update(customer.id, customer.attributes)
+      else
+        create(customer.attributes)
+      end
+    end
+
     private
 
     attr_reader :api_client
