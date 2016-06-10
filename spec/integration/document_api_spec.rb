@@ -48,8 +48,9 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   describe '#get_pdf' do
     it 'returns a PDF' do
       document = subject.get_pdf(84718807)
-      expect(document).to be_a(String)
-      expect(document).to start_with('%PDF-1.4')
+      expect(document).to be_a(EasybillRestClient::Pdf)
+      expect(document.filename).to eq('Rechnung-C1606-16178-154086.pdf')
+      expect(document.content).to start_with('%PDF-1.4')
     end
   end
 

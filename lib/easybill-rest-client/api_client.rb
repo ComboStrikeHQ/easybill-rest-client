@@ -55,8 +55,12 @@ module EasybillRestClient
     end
 
     def extract_response_body(response)
-      if response.headers['content-type'] == 'application/json'
+      case response.headers.fetch('content-type')
+      when 'application/json'
         JSON.parse(response.body, symbolize_names: true)
+      when 'application/pdf'
+        /\Wfilename="(?<filename>.*?)"/ =~ response.headers.fetch('content-disposition')
+        Pdf.new(filename: filename, content: response.body)
       else
         response.body
       end
