@@ -2,5 +2,7 @@ machine:
   ruby:
     version: 2.2.3
 dependencies:
-  pre:
+  override:
+    - bundle install
     - bundle exec rake rubocop
+    - bundle exec rspec
