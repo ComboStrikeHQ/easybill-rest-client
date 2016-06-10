@@ -36,6 +36,10 @@ module EasybillRestClient
       api_client.request(:delete, "/documents/#{document_id}")
     end
 
+    def cancel(document_id)
+      build_document(api_client.request(:post, "/documents/#{document_id}/cancel"))
+    end
+
     private
 
     attr_reader :api_client

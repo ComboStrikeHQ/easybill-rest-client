@@ -72,4 +72,12 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
         .to raise_error(EasybillRestClient::ApiError, 'Document#84718807 not found.')
     end
   end
+
+  describe '#cancel' do
+    it 'cancels a document' do
+      expect(subject.find(84727902).cancel_id).to be_nil
+      expect(subject.cancel(84727902)).to be_a(EasybillRestClient::Document)
+      expect(subject.find(84727902).cancel_id).to be_a(Fixnum)
+    end
+  end
 end
