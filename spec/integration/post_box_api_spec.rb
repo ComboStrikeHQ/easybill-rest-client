@@ -11,4 +11,12 @@ RSpec.describe EasybillRestClient::PostBoxApi, :vcr do
       expect(post_boxes.first.id).to be_a(Fixnum)
     end
   end
+
+  describe '#find' do
+    it 'returns a post box' do
+      post_box = subject.find(58942178)
+      expect(post_box).to be_a(EasybillRestClient::PostBox)
+      expect(post_box.id).to be_a(Fixnum)
+    end
+  end
 end
