@@ -59,7 +59,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   describe '#finish' do
     it 'marks a drafted document as finished' do
       expect(subject.find(84725627).number).to be_nil
-      subject.finish(84725627)
+      expect(subject.finish(84725627)).to be_a(EasybillRestClient::Document)
       expect(subject.find(84725627).number).to be_a(String)
     end
   end

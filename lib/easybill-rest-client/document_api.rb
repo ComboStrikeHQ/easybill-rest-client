@@ -29,7 +29,7 @@ module EasybillRestClient
     end
 
     def finish(document_id)
-      api_client.request(:put, "/documents/#{document_id}/done")
+      build_document(api_client.request(:put, "/documents/#{document_id}/done"))
     end
 
     def delete(document_id)
