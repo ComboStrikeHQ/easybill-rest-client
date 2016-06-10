@@ -9,10 +9,10 @@ module EasybillRestClient
     end
 
     def find_all(params = {})
-      api_client.request(:get, '/documents').map { |d| build_document(d) }
+      api_client.request_collection(:get, '/documents', params).map { |d| build_document(d) }
     end
 
-    def store(document)
+    def save(document)
       if document.id
         build_document(api_client.request(:put, "/documents/#{document.id}", document.attributes))
       else
@@ -20,35 +20,16 @@ module EasybillRestClient
       end
     end
 
+    def get_pdf(document_id)
+      api_client.request(:get, "/documents/#{document_id}/pdf")
+    end
+
     private
 
     attr_reader :api_client
 
-    def build_document(hash)
-      hash[:document_date] &&= Date.parse(hash[:document_date])
-      hash[:due_date] &&= Date.parse(hash[:due_date])
-      hash[:paid_at] &&= Date.parse(hash[:paid_at])
-      hash[:address][:personal] = false if hash[:address][:personal].nil?
-      # TODO: dry-types does not seem to support optional structs as attributes,
-      # so we ignore this for now, since we don't use it anyway.
-      hash.delete(:recurring_options)
-      Document.new(
-        hash.merge(
-          created_at: DateTime.parse(hash[:created_at]),
-          # address: DocumentAddress.new(hash[:address]),
-          # label_address: DocumentAddress.new(hash[:label_address]),
-          items: items(hash),
-          # recurring_options: DocumentRecurringOptions.new(hash[:recurring_options]),
-          # service_date: DocumentServiceDate.new(hash[:service_date])
-        )
-      )
-    end
-
-    def items(hash)
-      hash[:items].map do |item|
-        item[:quantity] = nil if item[:quantity] == false
-        item
-      end
+    def build_document(params)
+      Document.new(params)
     end
   end
 end

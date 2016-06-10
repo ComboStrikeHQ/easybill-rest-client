@@ -1,17 +1,17 @@
 module EasybillRestClient
-  class DocumentAddress < Dry::Types::Struct
-    constructor_type :schema
-    attribute :salutation, Types::Maybe::Strict::String
-    attribute :personal, Types::Bool
-	  attribute :title, Types::Maybe::Strict::String
-	  attribute :first_name, Types::Maybe::Strict::String
-	  attribute :last_name, Types::Maybe::Strict::String
-	  attribute :suffix_1, Types::Maybe::Strict::String
-	  attribute :suffix_2, Types::Maybe::Strict::String
-	  attribute :company_name, Types::Maybe::Strict::String
-	  attribute :street, Types::Maybe::Strict::String
-	  attribute :zip_code, Types::Maybe::Strict::String
-	  attribute :city, Types::Maybe::Strict::String
-	  attribute :country, Types::Maybe::Strict::String
+  class DocumentAddress
+    include Virtus.model
+    attribute :salutation, String
+    attribute :personal, Boolean
+	  attribute :title, String
+	  attribute :first_name, String
+	  attribute :last_name, String
+	  attribute :suffix_1, String
+	  attribute :suffix_2, String
+	  attribute :company_name, String
+	  attribute :street, String
+	  attribute :zip_code, String
+	  attribute :city, String
+	  attribute :country, String
   end
 end

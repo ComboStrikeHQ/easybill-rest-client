@@ -2,6 +2,7 @@ require 'pry'
 require 'vcr'
 Dir[File.expand_path('../support/*.rb', __FILE__)].each { |rb| require rb }
 require 'easybill-rest-client'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.include SetupApiClient

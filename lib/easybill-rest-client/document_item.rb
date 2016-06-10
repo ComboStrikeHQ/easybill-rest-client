@@ -1,30 +1,30 @@
 module EasybillRestClient
-  class DocumentItem < Dry::Types::Struct
-    constructor_type :schema
-	  attribute :number, Types::Maybe::Strict::String
-	  attribute :description, Types::Maybe::Strict::String
-	  attribute :quantity, Types::Maybe::Strict::Int
-	  attribute :unit, Types::Maybe::Strict::String
-	  attribute :type, Types::Maybe::Strict::String # TODO: enum
-	  attribute :position, Types::Maybe::Strict::Int
-	  attribute :single_price_net, Types::Maybe::Strict::Int
-	  attribute :single_price_gross, Types::Maybe::Coercible::Int # TODO: Should we round here?
-	  attribute :vat_percent, Types::Maybe::Strict::Int
-	  attribute :discount, Types::Maybe::Strict::Int
-	  attribute :discount_type, Types::Maybe::Strict::String
-	  attribute :position_id, Types::Maybe::Strict::Int
-	  attribute :total_price_net, Types::Maybe::Strict::Int
-	  attribute :total_price_gross, Types::Maybe::Coercible::Int # TODO: Should we round here?
-	  attribute :total_vat, Types::Maybe::Coercible::Int
-	  attribute :serial_number_id, Types::Maybe::Strict::String
-	  attribute :serial_number, Types::Maybe::Strict::String
-	  attribute :booking_account, Types::Maybe::Strict::String
-	  attribute :export_cost_1, Types::Maybe::Strict::String
-	  attribute :export_cost_2, Types::Maybe::Strict::String
-	  attribute :cost_price_net, Types::Maybe::Strict::Int
-	  attribute :cost_price_total, Types::Maybe::Strict::Int
-	  attribute :cost_price_charge, Types::Maybe::Strict::Int
-	  attribute :cost_price_charge_type, Types::Maybe::Strict::String
-	  attribute :id, Types::Maybe::Strict::Int
+  class DocumentItem
+    include Virtus.model
+	  attribute :number, String
+	  attribute :description, String
+	  attribute :quantity, Integer
+	  attribute :unit, String
+	  attribute :type, String # TODO: enum
+	  attribute :position, Integer
+	  attribute :single_price_net, Float
+	  attribute :single_price_gross, Float # TODO: Should we round here?
+	  attribute :vat_percent, Integer
+	  attribute :discount, Integer
+	  attribute :discount_type, String
+	  attribute :position_id, Integer
+	  attribute :total_price_net, Float
+	  attribute :total_price_gross, Float # TODO: Should we round here?
+	  attribute :total_vat, Integer
+	  attribute :serial_number_id, String
+	  attribute :serial_number, String
+	  attribute :booking_account, String
+	  attribute :export_cost_1, String
+	  attribute :export_cost_2, String
+	  attribute :cost_price_net, Integer
+	  attribute :cost_price_total, Integer
+	  attribute :cost_price_charge, Integer
+	  attribute :cost_price_charge_type, String
+	  attribute :id, Integer
   end
 end

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.license     = "Apache-2.0"
 
   s.add_runtime_dependency 'faraday'
-  s.add_runtime_dependency 'dry-types'
+  s.add_runtime_dependency 'virtus'
   s.add_runtime_dependency 'retryable'
 
   s.add_development_dependency 'rspec', '~> 3.2', '>= 3.2.0'
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
   s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.10'
+  s.add_development_dependency 'pry'
 
   s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
   s.test_files    = `find spec/*`.split("\n")

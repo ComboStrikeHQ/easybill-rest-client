@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.easybill.de/rest/v1/documents
+    body:
+      encoding: UTF-8
+      string: '{"items":[],"number":"Y"}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Authorization:
+      - Basic easybill-basic-auth-key
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.10.0
+      Date:
+      - Fri, 06 May 2016 15:42:33 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: UTF-8
+      string: '{"address":{},"amount":0,"amount_net":0,"bank_debit_form":null,"cancel_id":null,"cash_allowance":null,"cash_allowance_days":null,"cash_allowance_text":null,"contact_id":null,"contact_label":"","contact_text":"","created_at":"2016-05-06
+        17:42:33","currency":"EUR","customer_id":null,"discount":null,"discount_type":null,"document_date":"2016-05-06","due_date":null,"edited_at":"2016-05-06
+        17:42:33","grace_period":10,"id":79126074,"is_archive":false,"is_draft":true,"items":[],"label_address":{},"last_postbox_id":null,"number":"Y","paid_amount":0,"paid_at":null,"pdf_pages":1,"pdf_template":null,"project_id":null,"ref_id":null,"service_date":{"type":"DEFAULT","date":"2016-05-06","date_from":null,"date_to":null,"text":null},"status":null,"text":"Vielen
+        Dank f\u00fcr Ihren Auftrag!\n\nBitte begleichen Sie den offenen Betrag bis
+        zum %DOKUMENT.DATUM-FAELLIG%.\n\nMit freundlichen Gr\u00fc\u00dfen\n\n%FIRMA.FIRMA%","text_prefix":"%KUNDE.ANREDE%,\nnachfolgend
+        berechnen wir Ihnen wie vorab besprochen:\n","title":null,"type":"INVOICE","use_shipping_address":false,"vat_option":null}'
+    http_version: 
+  recorded_at: Fri, 06 May 2016 15:42:33 GMT
+recorded_with: VCR 3.0.1
