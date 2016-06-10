@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe EasybillRestClient::ApiClient do
   subject do
     described_class.new(api_key: ENV['EASYBILL_API_KEY'], retry_cool_off_time: 0)
@@ -26,7 +27,7 @@ RSpec.describe EasybillRestClient::ApiClient do
 
       expect(
         subject.request(:get, '/')
-      ).to eq({ :foo => 'bar' })
+      ).to eq(foo: 'bar')
     end
   end
 end

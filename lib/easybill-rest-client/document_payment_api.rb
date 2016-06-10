@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module EasybillRestClient
   class DocumentPaymentApi
     def initialize(api_client)
@@ -5,7 +6,8 @@ module EasybillRestClient
     end
 
     def find_all(params = {})
-      api_client.request_collection(:get, '/document-payments', params).map { |p| build_document_payment(p) }
+      api_client.request_collection(:get, '/document-payments', params)
+        .map { |p| build_document_payment(p) }
     end
 
     def find(document_payment_id)

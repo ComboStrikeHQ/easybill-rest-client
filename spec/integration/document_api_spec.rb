@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   subject do
     described_class.new(api_client)
@@ -37,7 +38,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     end
 
     it 'updates a document' do
-      document = subject.save(EasybillRestClient::Document.new(id: 79125727, number: 'Z'))
+      subject.save(EasybillRestClient::Document.new(id: 79125727, number: 'Z'))
       expect(subject.find(79125727).number).to eq('Z')
     end
   end

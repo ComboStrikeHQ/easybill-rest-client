@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SetupDocument
   def setup_finished_document(opts = {})
     customer_api = EasybillRestClient::CustomerApi.new(api_client)

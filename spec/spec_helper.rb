@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'pry'
 require 'vcr'
 Dir[File.expand_path('../support/*.rb', __FILE__)].each { |rb| require rb }
@@ -20,7 +21,7 @@ end
 VCR.configure do |c|
   c.default_cassette_options = { match_requests_on: %i(method uri body) }
   c.configure_rspec_metadata!
-  c.cassette_library_dir = "spec/fixtures/vcr"
+  c.cassette_library_dir = 'spec/fixtures/vcr'
   c.hook_into :webmock
   c.filter_sensitive_data('easybill-username') { ENV.fetch('EASYBILL_USERNAME') }
   c.filter_sensitive_data('easybill-api-key') { ENV.fetch('EASYBILL_API_KEY') }

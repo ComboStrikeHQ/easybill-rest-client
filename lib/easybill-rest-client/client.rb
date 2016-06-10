@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'easybill-rest-client/api_client'
 require 'easybill-rest-client/customer_api'
 require 'easybill-rest-client/document_api'

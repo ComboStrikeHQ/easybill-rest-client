@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module EasybillRestClient
   class PostBox
     include Virtus.model

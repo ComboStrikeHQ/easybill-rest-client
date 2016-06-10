@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'retryable'
 
 module EasybillRestClient
@@ -50,7 +51,7 @@ module EasybillRestClient
       unless response.status.to_s.start_with?('2')
         raise ApiError, body[:message]
       end
-      body.length > 0 ? body : nil
+      !body.empty? ? body : nil
     end
 
     def extract_response_body(response)

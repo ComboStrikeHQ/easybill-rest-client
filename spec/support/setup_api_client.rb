@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module SetupApiClient
   def api_client
     @api_client ||= EasybillRestClient::ApiClient.new(
