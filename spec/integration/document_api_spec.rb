@@ -56,11 +56,11 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     end
   end
 
-  describe '#documents_id_done_put' do
+  describe '#finish' do
     it 'marks a drafted document as finished' do
-      expect(subject.documents_id_get(62331327).number).to be(nil)
-      subject.documents_id_done_put(62331327)
-      expect(subject.documents_id_get(62331327).number).to eq('201610037')
+      expect(subject.find(84725627).number).to be_nil
+      subject.finish(84725627)
+      expect(subject.find(84725627).number).to be_a(String)
     end
   end
 end

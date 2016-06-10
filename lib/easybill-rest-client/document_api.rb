@@ -28,6 +28,10 @@ module EasybillRestClient
       api_client.request(:post, "/documents/#{document_id}/send/email")
     end
 
+    def finish(document_id)
+      api_client.request(:put, "/documents/#{document_id}/done")
+    end
+
     private
 
     attr_reader :api_client
