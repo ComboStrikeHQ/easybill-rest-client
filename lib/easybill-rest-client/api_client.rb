@@ -7,6 +7,7 @@ module EasybillRestClient
     DEFAULT_RETRY_COOL_OFF_TIME = 15
     DEFAULT_TRIES = 5
     MAX_PAGE_SIZE = 1000
+    USERNAME = 'rest-api@easybill.de'
 
     def initialize(api_key:, retry_cool_off_time: DEFAULT_RETRY_COOL_OFF_TIME, tries: DEFAULT_TRIES)
       @api_key = api_key
@@ -85,7 +86,7 @@ module EasybillRestClient
     end
 
     def basic_auth_token
-      @auth_header ||= "Basic #{Base64.encode64("rest-api@easybill.de:#{api_key}").delete("\r\n")}"
+      @auth_header ||= "Basic #{Base64.encode64("#{USERNAME}:#{api_key}").delete("\r\n")}"
     end
 
     def faraday
