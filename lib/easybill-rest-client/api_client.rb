@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 require 'retryable'
+require 'json'
+require 'logger'
 
 module EasybillRestClient
   class ApiClient
@@ -9,10 +11,11 @@ module EasybillRestClient
     MAX_PAGE_SIZE = 1000
     USERNAME = 'rest-api@easybill.de'
 
-    def initialize(api_key:, retry_cool_off_time: DEFAULT_RETRY_COOL_OFF_TIME, tries: DEFAULT_TRIES)
-      @api_key = api_key
-      @retry_cool_off_time = retry_cool_off_time
-      @tries = tries
+    def initialize(options = {})
+      @api_key = options.fetch(:api_key)
+      @retry_cool_off_time = options.fetch(:retry_cool_off_time, DEFAULT_RETRY_COOL_OFF_TIME)
+      @tries = options.fetch(:tries, DEFAULT_TRIES)
+      @logger = options.fetch(:logger, Logger.new($stdout))
     end
 
     def request_collection(method, endpoint, params = {})
@@ -39,11 +42,24 @@ module EasybillRestClient
         req.url "#{base_path}#{endpoint}"
         req.headers['Authorization'] = basic_auth_token
         if %i(put post).include?(method)
-          req.body = params.reject { |_k, v| v.nil? }.to_json
+          json_params = params.reject { |_k, v| v.nil? }.to_json
+          log_request(method, endpoint, json_params)
+          req.body = json_params
         else
-          req.params = params
+          normalized_params = comma_separate_arrays(params.dup)
+          log_request(method, endpoint, normalized_params)
+          req.params = normalized_params
         end
       end
+    end
+
+    def comma_separate_arrays(params)
+      params.map { |k, v| [k, v.is_a?(Array) ? v.join(',') : v] }.to_h
+    end
+
+    def log_request(method, endpoint, params)
+      json_params = params.is_a?(String) ? params : params.to_json
+      logger.info("[easybill-rest-client] #{method.to_s.upcase} #{endpoint} #{json_params}")
     end
 
     def process_response(response)
@@ -93,7 +109,7 @@ module EasybillRestClient
       @faraday ||= Faraday.new(url: BASE_URL)
     end
 
-    attr_reader :api_key, :retry_cool_off_time, :tries
+    attr_reader :api_key, :retry_cool_off_time, :tries, :logger
   end
 
   class ApiError < RuntimeError; end

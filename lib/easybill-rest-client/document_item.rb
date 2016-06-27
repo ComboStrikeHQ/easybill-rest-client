@@ -2,6 +2,9 @@
 module EasybillRestClient
   class DocumentItem
     include Virtus.model
+    values do
+      attribute :id, Integer
+    end
     attribute :number, String
     attribute :description, String
     attribute :quantity, Integer
@@ -26,6 +29,5 @@ module EasybillRestClient
     attribute :cost_price_total, Integer
     attribute :cost_price_charge, Integer
     attribute :cost_price_charge_type, String
-    attribute :id, Integer
   end
 end

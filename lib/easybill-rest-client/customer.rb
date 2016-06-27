@@ -2,6 +2,9 @@
 module EasybillRestClient
   class Customer
     include Virtus.model
+    values do
+      attribute :id, Integer
+    end
     attribute :acquire_options, String # a digit 1..8
     attribute :bank_account, String
     attribute :bank_account_owner, String
@@ -33,7 +36,6 @@ module EasybillRestClient
     attribute :first_name, String
     attribute :grace_period, String
     attribute :group_id, String
-    attribute :id, Integer
     attribute :info_1, String
     attribute :info_2, String
     attribute :internet, String

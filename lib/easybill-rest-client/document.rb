@@ -2,6 +2,9 @@
 module EasybillRestClient
   class Document
     include Virtus.model
+    values do
+      attribute :id, Integer
+    end
     attribute :address, DocumentAddress
     attribute :amount_net, Integer
     attribute :amount, Integer
@@ -22,7 +25,6 @@ module EasybillRestClient
     attribute :due_date, Date
     attribute :edited_at, String
     attribute :grace_period, Integer
-    attribute :id, Integer
     attribute :is_archive, Boolean
     attribute :is_draft, Boolean
     attribute :items, [DocumentItem]
