@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 module EasybillRestClient
-  class GenericApi
+  module GenericApi
     def self.new(resource_name, resource_class)
       Class.new do
         include InstanceMethods
