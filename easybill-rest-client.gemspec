@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.description = 'A ruby wrapper for the Easybill REST API'
   s.license     = 'MIT'
 
-  s.add_runtime_dependency 'faraday', '~> 0.9'
   s.add_runtime_dependency 'virtus', '~> 1.0'
   s.add_runtime_dependency 'retryable', '~> 2.0'
 

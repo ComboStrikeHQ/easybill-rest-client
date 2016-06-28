@@ -2,14 +2,15 @@
 require 'retryable'
 require 'json'
 require 'logger'
+require 'net/http'
+
+require 'easybill-rest-client/request_builder'
 
 module EasybillRestClient
   class ApiClient
-    BASE_URL = 'https://api.easybill.de/rest/v1'
     DEFAULT_RETRY_COOL_OFF_TIME = 15
     DEFAULT_TRIES = 5
     MAX_PAGE_SIZE = 1000
-    USERNAME = 'rest-api@easybill.de'
 
     def initialize(options = {})
       @api_key = options.fetch(:api_key)
@@ -38,23 +39,15 @@ module EasybillRestClient
     private
 
     def perform_request(method, endpoint, params)
-      faraday.public_send(method) do |req|
-        req.url "#{base_path}#{endpoint}"
-        req.headers['Authorization'] = basic_auth_token
-        if %i(put post).include?(method)
-          json_params = params.reject { |_k, v| v.nil? }.to_json
-          log_request(method, endpoint, json_params)
-          req.body = json_params
-        else
-          normalized_params = comma_separate_arrays(params.dup)
-          log_request(method, endpoint, normalized_params)
-          req.params = normalized_params
-        end
-      end
-    end
+      request_builder = RequestBuilder.new(method)
+      uri = request_builder.build_uri(endpoint, params)
+      request = request_builder.build_request(api_key, uri.request_uri, params)
+      request_details = request_builder.request_details(uri, request)
+      log_request(method, endpoint, request_details)
 
-    def comma_separate_arrays(params)
-      params.map { |k, v| [k, v.is_a?(Array) ? v.join(',') : v] }.to_h
+      Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+        http.request(request)
+      end
     end
 
     def log_request(method, endpoint, params)
@@ -63,20 +56,22 @@ module EasybillRestClient
     end
 
     def process_response(response)
-      raise TooManyRequests if response.status == 429
+      raise TooManyRequests if response.is_a?(Net::HTTPTooManyRequests)
       body = extract_response_body(response)
-      unless response.status.to_s.start_with?('2')
-        raise ApiError, body[:message]
+      unless response.is_a?(Net::HTTPSuccess)
+        message = body.is_a?(Hash) ? body[:message] : body
+        raise ApiError, message
       end
-      !body.empty? ? body : nil
+      body && !body.empty? ? body : nil
     end
 
     def extract_response_body(response)
-      case response.headers.fetch('content-type')
+      return unless response.class.body_permitted?
+      case response.content_type
       when 'application/json'
         JSON.parse(response.body, symbolize_names: true)
       when 'application/pdf'
-        /\Wfilename="(?<filename>.*?)"/ =~ response.headers.fetch('content-disposition')
+        /\Wfilename="(?<filename>.*?)"/ =~ response.fetch('content-disposition')
         Pdf.new(filename: filename, content: response.body)
       else
         response.body
@@ -95,18 +90,6 @@ module EasybillRestClient
           page += 1
         end
       end.lazy
-    end
-
-    def base_path
-      @base_path ||= URI.parse(BASE_URL).path
-    end
-
-    def basic_auth_token
-      @auth_header ||= "Basic #{Base64.encode64("#{USERNAME}:#{api_key}").delete("\r\n")}"
-    end
-
-    def faraday
-      @faraday ||= Faraday.new(url: BASE_URL)
     end
 
     attr_reader :api_key, :retry_cool_off_time, :tries, :logger
