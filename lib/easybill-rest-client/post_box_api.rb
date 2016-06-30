@@ -2,5 +2,13 @@
 require 'easybill-rest-client/generic_api'
 
 module EasybillRestClient
-  PostBoxApi = GenericApi.new('post-boxes', PostBox)
+  class PostBoxApi < GenericApi
+    def resource_name
+      'post-boxes'
+    end
+
+    def resource_class
+      PostBox
+    end
+  end
 end

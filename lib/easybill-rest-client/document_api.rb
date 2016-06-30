@@ -2,7 +2,15 @@
 require 'easybill-rest-client/generic_api'
 
 module EasybillRestClient
-  class DocumentApi < GenericApi.new('documents', Document)
+  class DocumentApi < GenericApi
+    def resource_name
+      'documents'
+    end
+
+    def resource_class
+      Document
+    end
+
     def get_pdf(document_id)
       api_client.request(:get, "/#{resource_name}/#{document_id}/pdf")
     end

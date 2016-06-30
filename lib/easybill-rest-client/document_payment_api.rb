@@ -2,5 +2,13 @@
 require 'easybill-rest-client/generic_api'
 
 module EasybillRestClient
-  DocumentPaymentApi = GenericApi.new('document-payments', DocumentPayment)
+  class DocumentPaymentApi < GenericApi
+    def resource_name
+      'document-payments'
+    end
+
+    def resource_class
+      DocumentPayment
+    end
+  end
 end

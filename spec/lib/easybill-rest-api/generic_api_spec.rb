@@ -2,9 +2,8 @@
 
 RSpec.describe EasybillRestClient::GenericApi do
   let(:api_client) { double('ApiClient') }
-  let(:resource_name) { 'resource' }
-  let(:resource_class) { 'Resource' }
-  subject { described_class.new(resource_name, resource_class).new(api_client) }
+
+  subject { described_class.new(api_client) }
 
   describe '#save' do
     context 'entity does not exist' do

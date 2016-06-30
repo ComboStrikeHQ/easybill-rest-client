@@ -2,5 +2,13 @@
 require 'easybill-rest-client/generic_api'
 
 module EasybillRestClient
-  CustomerApi = GenericApi.new('customers', Customer)
+  class CustomerApi < GenericApi
+    def resource_name
+      'customers'
+    end
+
+    def resource_class
+      Customer
+    end
+  end
 end
