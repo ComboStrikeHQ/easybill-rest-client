@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 require 'virtus'
-require 'faraday'
 require 'json'
 require 'base64'
 
