@@ -4,7 +4,6 @@ module EasybillRestClient
     BASE_URL = 'https://api.easybill.de/rest/v1'
     USERNAME = 'rest-api@easybill.de'
     SUPPORTED_METHODS = %i(get post put delete).freeze
-    HTTP_METHODS_ALLOWING_BODY = %i(post put).freeze
 
     def initialize(method)
       unless SUPPORTED_METHODS.include?(method.to_sym)
@@ -41,7 +40,7 @@ module EasybillRestClient
     end
 
     def body_allowed?
-      HTTP_METHODS_ALLOWING_BODY.include? method
+      request_class::REQUEST_HAS_BODY
     end
 
     def comma_separate_arrays(params)
