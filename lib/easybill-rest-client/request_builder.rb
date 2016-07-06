@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+require 'json'
+require 'net/http'
+
 module EasybillRestClient
   class RequestBuilder
     BASE_URL = 'https://api.easybill.de/rest/v1'

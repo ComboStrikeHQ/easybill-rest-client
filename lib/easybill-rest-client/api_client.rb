@@ -51,8 +51,7 @@ module EasybillRestClient
     end
 
     def log_request(method, endpoint, params)
-      json_params = params.is_a?(String) ? params : params.to_json
-      logger.info("[easybill-rest-client] #{method.to_s.upcase} #{endpoint} #{json_params}")
+      logger.info("[easybill-rest-client] #{method.to_s.upcase} #{endpoint} #{params}")
     end
 
     def process_response(response)

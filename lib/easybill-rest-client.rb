@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 require 'virtus'
-require 'json'
-require 'base64'
 
 require 'easybill-rest-client/customer'
 require 'easybill-rest-client/document_address'
