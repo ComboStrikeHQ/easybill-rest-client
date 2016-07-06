@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.easybill.de/rest/v1/post-boxes?limit=1000&page=1&type=EMAIL
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Authorization:
+      - Basic easybill-basic-auth-key
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 10 Jun 2016 09:29:44 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      Cache-Control:
+      - private, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' *.easybill.de *.paymill.de *.paymill.com;
+        script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' *.paymill.de *.paymill.com
+        *.google-analytics.com *.googleadservices.com d2wy8f7a9ursnm.cloudfront.net;
+        img-src ''self'' data: *.doubleclick.net notify.bugsnag.com *.paypalobjects.com
+        online.swagger.io *.google-analytics.com *.google.com *.google.de *.google.at
+        *.google.ch; style-src ''self'' ''unsafe-inline'' fonts.googleapis.com; font-src
+        ''self'' themes.googleusercontent.com fonts.gstatic.com; frame-src ''self''
+        *.googleadservices.com ssl.kaptcha.com *.paymill.de *.paymill.com *.mediafinanz.de
+        *.google.de *.google.com *.google.at *.google.ch *.doubleclick.net player.vimeo.com
+        *.facebook.com; object-src ''self'''
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"pages":1,"limit":100,"total":1,"items":[{"cc":null,"create_at":"2016-06-10
+        11:29:11","date":"2016-06-10","document_id":84730384,"from":"billing@ad2games.com","id":58942178,"message":"%Kunde.Anrede%,\n\nanbei
+        erhalten Sie Ihre Rechnung Nr. %dokument.nummer% vom %dokument.datum% im pdf-Format.\n\nZum
+        \u00d6ffnen dieser Datei ben\u00f6tigen Sie den Adobe Acrobat Reader, welchen
+        Sie auf nachfolgender Internetadresse kostenlos herunterladen k\u00f6nnen:\nhttp:\/\/www.adobe.com\/de\/products\/acrobat\/readstep2.html\n\nMit
+        freundlichen Gr\u00fc\u00dfen","processed_at":null,"send_by_self":false,"send_with_attachment":true,"status":"ERROR","status_msg":"Smtp
+        Fehler. Bitte \u00fcberpr\u00fcfen Sie Ihre \u0022Eigener Mail-Server\u0022
+        Einstellungen. (SMTP Error: Could not authenticate.)","subject":"Rechnung-%DOKUMENT.NUMMER%","to":"ns@ad2games.com","type":"EMAIL"}]}'
+    http_version:
+  recorded_at: Fri, 10 Jun 2016 09:29:44 GMT
+recorded_with: VCR 3.0.3

@@ -1,49 +1,45 @@
-RSpec.describe EasybillRestClient::CustomerApi, :vcr do
-  subject do
-    described_class.new(api_client)
-  end
+# frozen_string_literal: true
+module EasybillRestClient
+  RSpec.describe CustomerApi, :vcr do
+    subject { client.customers }
 
-  describe '#customers_get' do
-    it 'returns customers' do
-      customers = subject.customers_get
-      expect(customers.items).to be_any
+    describe 'a list of customers' do
+      it 'gets all customers' do
+        customers = subject.find_all.to_a
+        expect(customers).not_to be_empty
+        customers.each do |customer|
+          expect(customer).to be_a(Customer)
+        end
+      end
+
+      it 'gets customers matching a filter' do
+        expect(subject.find_all(number: '15408').to_a).to match_array [
+          an_object_having_attributes(number: '15408')
+        ]
+      end
     end
 
-    it 'returns customers by number' do
-      customers = subject.customers_get(number: 154085)
-      expect(customers.items.count).to eq(1)
-      expect(customers.items.first.number).to eq('154085')
-    end
-  end
+    it 'creates, updates and deletes customer' do
+      existing_customer = subject.find_all(number: 'TEST').first
+      if existing_customer
+        subject.delete(existing_customer.id)
+        expect(subject.find_all(number: 'TEST').to_a).to be_empty
+      end
 
-  describe '#customers_id_get' do
-    it 'returns a customer by id' do
-      customer = subject.customers_id_get(51374354)
-      expect(customer.id).to eq(51374354)
-    end
-  end
+      customer = subject.create(subject.build(
+        number: 'TEST',
+        company_name: 'Fake',
+        first_name: 'John',
+        last_name: 'Doe'))
 
-  describe '#customers_post' do
-    it 'creates a customer' do
-      customer = subject.customers_post({ company_name: 'ACME Inc.', last_name: 'Smith' })
-      expect(customer.id).to eq(51374354)
-    end
-  end
+      customer.first_name = 'Bob'
+      subject.update(customer)
 
-  describe '#customers_id_put' do
-    it 'updates a customer' do
-      subject.customers_id_put(16314756, emails: ['user@example.com'])
-      expect(subject.customers_id_get(16314756).emails).to eq(['user@example.com'])
-    end
-  end
+      customer = subject.find(customer.id)
+      expect(customer.first_name).to eq('Bob')
 
-  describe '#customers_id_delete' do
-    it 'deletes a customer' do
-      expect(subject.customers_id_get(16314756)).to_not be(nil)
-      subject.customers_id_delete(16314756)
-      expect do
-        expect(subject.customers_id_get(16314756)).to be(nil)
-      end.to raise_error(EasybillRestClient::ApiError, 'Not Found')
+      subject.delete(customer.id)
+      expect(subject.find_all(number: 'TEST').to_a).to be_empty
     end
   end
 end

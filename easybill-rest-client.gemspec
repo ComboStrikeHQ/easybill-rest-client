@@ -1,32 +1,29 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "easybill-rest-client/version"
+# frozen_string_literal: true
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+require 'easybill-rest-client/version'
 
 Gem::Specification.new do |s|
-  s.name        = "easybill-rest-client"
+  s.name        = 'easybill-rest-client'
   s.version     = EasybillRestClient::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Zeke Sikelianos", "Tony Tam"]
-  s.email       = ["zeke@wordnik.com", "fehguy@gmail.com"]
-  s.homepage    = "http://swagger.io"
-  s.summary     = %q{A ruby wrapper for the swagger APIs}
-  s.description = %q{This gem maps to a swagger API}
-  s.license     = "Apache-2.0"
+  s.authors     = ['ad2games GmbH']
+  s.email       = ['developers@ad2games.com']
+  s.homepage    = 'http://ad2games.com'
+  s.summary     = 'A ruby wrapper for the Easybill REST API'
+  s.description = 'A ruby wrapper for the Easybill REST API'
+  s.license     = 'MIT'
 
-  s.add_runtime_dependency 'typhoeus', '~> 0.2', '>= 0.2.1'
-  s.add_runtime_dependency 'json', '~> 1.4', '>= 1.4.6'
-  s.add_runtime_dependency 'retryable'
+  s.add_runtime_dependency 'virtus', '~> 1.0'
+  s.add_runtime_dependency 'retryable', '~> 2.0'
 
-  s.add_development_dependency 'rspec', '~> 3.2', '>= 3.2.0'
-  s.add_development_dependency 'vcr', '~> 2.9', '>= 2.9.3'
-  s.add_development_dependency 'webmock', '~> 1.6', '>= 1.6.2'
-  s.add_development_dependency 'autotest', '~> 4.4', '>= 4.4.6'
-  s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
-  s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
-  s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.10'
+  s.add_development_dependency 'rspec', '~> 3.4'
+  s.add_development_dependency 'vcr', '~> 3.0'
+  s.add_development_dependency 'webmock', '~> 2.1'
+  s.add_development_dependency 'pry'
 
-  s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
+  s.files         = `find *`.split("\n").uniq.sort.reject(&:empty?)
   s.test_files    = `find spec/*`.split("\n")
   s.executables   = []
-  s.require_paths = ["lib"]
+  s.require_paths = %w(lib)
 end

@@ -1,58 +1,87 @@
+# frozen_string_literal: true
 RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   subject do
-    described_class.new(api_client)
+    client.documents
   end
 
-  describe '#documents_get' do
+  describe '#find' do
+    it 'returns a document' do
+      document = subject.find(79121874)
+      expect(document).to be_a(EasybillRestClient::Document)
+      expect(document.number).to eq('XYZ-123')
+      expect(document.address).to be_a(EasybillRestClient::DocumentAddress)
+      expect(document.label_address).to be_a(EasybillRestClient::DocumentAddress)
+      expect(document.items).to be_a(Array)
+      expect(document.items.first).to be_a(EasybillRestClient::DocumentItem)
+    end
+  end
+
+  describe '#find_all' do
     it 'returns documents' do
-      documents = subject.documents_get(type: 'INVOICE')
-      expect(documents.items.count).to eq(1)
-      expect(documents.items.first.number).to eq('201610032')
+      documents = subject.find_all.to_a
+      expect(documents.count).to eq(1)
+      expect(documents.first.number).to eq('XYZ-123')
     end
 
     it 'returns documents by number' do
-      documents = subject.documents_get(number: '201610032')
-      expect(documents.items.count).to eq(1)
-      expect(documents.items.first.number).to eq('201610032')
+      documents = subject.find_all(number: 'XYZ-123').to_a
+      expect(documents.count).to eq(1)
+      expect(documents.first.number).to eq('XYZ-123')
     end
   end
 
-  describe '#documents_post' do
+  describe '#create' do
     it 'creates a document' do
-      document = subject.documents_post({})
-      expect(document.id).to eq(61260835)
+      document = subject.create(subject.build(number: 'Y'))
+      expect(document.id).to eq(79126074)
+      expect(document.number).to eq('Y')
     end
   end
 
-  describe '#documents_id_get' do
-    it 'returns a document' do
-      document = subject.documents_id_get(61145172)
-      expect(document.id).to eq(61145172)
+  describe '#update' do
+    it 'updates a document' do
+      subject.update(subject.build(id: 79125727, number: 'Z'))
+      expect(subject.find(79125727).number).to eq('Z')
     end
   end
 
-  describe '#documents_id_pdf_get' do
+  describe '#get_pdf' do
     it 'returns a PDF' do
-      document = subject.documents_id_pdf_get(61145172)
-      expect(document.class).to be(Tempfile)
-      expect(File.exist?(document.path)).to be(true)
-      expect(document.size).to eq(168583)
+      document = subject.get_pdf(84718807)
+      expect(document).to be_a(EasybillRestClient::Pdf)
+      expect(document.filename).to eq('Rechnung-C1606-16178-154086.pdf')
+      expect(document.content).to start_with('%PDF-1.4')
     end
   end
 
-  describe '#documents_id_send_type_post' do
+  describe '#send_email' do
     it 'sends an email' do
-      expect do
-        subject.documents_id_send_type_post(61145172, 'email', {})
-      end.to_not raise_error
+      expect(subject.send_email(84718807)).to be_nil
     end
   end
 
-  describe '#documents_id_done_put' do
+  describe '#finish' do
     it 'marks a drafted document as finished' do
-      expect(subject.documents_id_get(62331327).number).to be(nil)
-      subject.documents_id_done_put(62331327)
-      expect(subject.documents_id_get(62331327).number).to eq('201610037')
+      expect(subject.find(84725627).number).to be_nil
+      expect(subject.finish(84725627)).to be_a(EasybillRestClient::Document)
+      expect(subject.find(84725627).number).to be_a(String)
+    end
+  end
+
+  describe '#delete' do
+    it 'deletes a document' do
+      expect(subject.find(84718807)).not_to be_nil
+      expect(subject.delete(84718807)).to be_nil
+      expect { subject.find(84718807) }
+        .to raise_error(EasybillRestClient::ApiError, 'Document#84718807 not found.')
+    end
+  end
+
+  describe '#cancel' do
+    it 'cancels a document' do
+      expect(subject.find(84727902).cancel_id).to be_nil
+      expect(subject.cancel(84727902)).to be_a(EasybillRestClient::Document)
+      expect(subject.find(84727902).cancel_id).to be_a(Fixnum)
     end
   end
 end
