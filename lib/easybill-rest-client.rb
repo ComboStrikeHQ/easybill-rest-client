@@ -11,7 +11,6 @@ require 'easybill-rest-client/document_service_date'
 require 'easybill-rest-client/document'
 require 'easybill-rest-client/post_box'
 require 'easybill-rest-client/document_payment'
-require 'easybill-rest-client/document_payment_api'
 require 'easybill-rest-client/pdf'
 
 require 'easybill-rest-client/client'
