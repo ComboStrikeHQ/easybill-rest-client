@@ -11,12 +11,14 @@ module EasybillRestClient
     DEFAULT_RETRY_COOL_OFF_TIME = 15
     DEFAULT_TRIES = 5
     MAX_PAGE_SIZE = 1000
+    OPEN_TIMEOUT = 5
 
     def initialize(options = {})
       @api_key = options.fetch(:api_key)
       @retry_cool_off_time = options.fetch(:retry_cool_off_time, DEFAULT_RETRY_COOL_OFF_TIME)
       @tries = options.fetch(:tries, DEFAULT_TRIES)
       @logger = options.fetch(:logger, Logger.new($stdout))
+      @logger.formatter = log_formatter
     end
 
     def request_collection(method, endpoint, params = {})
@@ -31,7 +33,12 @@ module EasybillRestClient
         sleep: retry_cool_off_time,
         on: EasybillRestClient::TooManyRequests
       ) do
-        response = perform_request(method, endpoint, params)
+        response = begin
+                     perform_request(method, endpoint, params)
+                   rescue Net::OpenTimeout
+                     logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
+                     retry
+                   end
         process_response(response)
       end
     end
@@ -46,12 +53,20 @@ module EasybillRestClient
       log_request(method, endpoint, request_details)
 
       Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+        http.open_timeout = OPEN_TIMEOUT
         http.request(request)
       end
     end
 
     def log_request(method, endpoint, params)
-      logger.info("[easybill-rest-client] #{method.to_s.upcase} #{endpoint} #{params}")
+      logger.info("#{method.to_s.upcase} #{endpoint} #{params}")
+    end
+
+    def log_formatter
+      formatter = Logger::Formatter.new
+      lambda do |severity, datetime, progname, msg|
+        formatter.call(severity, datetime, progname, "[easybill-rest-client] #{msg}")
+      end
     end
 
     def process_response(response)

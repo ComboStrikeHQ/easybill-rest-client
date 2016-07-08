@@ -26,4 +26,16 @@ RSpec.describe EasybillRestClient::ApiClient do
       ).to eq(foo: 'bar')
     end
   end
+
+  context 'timeout while opening connection' do
+    let(:response) { double('response') }
+
+    it 'retries the request' do
+      expect(subject).to receive(:perform_request).and_raise(Net::OpenTimeout)
+      expect(subject).to receive(:perform_request).and_return(response)
+      expect(subject).to receive(:process_response).with(response)
+
+      subject.request(:get, '/things')
+    end
+  end
 end
