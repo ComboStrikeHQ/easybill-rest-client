@@ -28,22 +28,37 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      Retryable.retryable(
-        tries: tries,
-        sleep: retry_cool_off_time,
-        on: EasybillRestClient::TooManyRequests
-      ) do
-        response = begin
-                     perform_request(method, endpoint, params)
-                   rescue Net::OpenTimeout
-                     logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
-                     retry
-                   end
-        process_response(response)
+      retry_on(EasybillRestClient::TooManyRequests) do
+        retry_on(Net::OpenTimeout) do |open_timeout_retries|
+          if open_timeout_retries > 0
+            logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
+          end
+          response = perform_request(method, endpoint, params)
+          process_response(response)
+        end
       end
     end
 
     private
+
+    def retry_on(klass)
+      opts = {
+        EasybillRestClient::TooManyRequests => {
+          tries: tries,
+          sleep: retry_cool_off_time,
+          on: klass
+        },
+        Net::OpenTimeout => {
+          tries: tries,
+          sleep: 0,
+          on: klass
+        }
+      }.fetch(klass)
+
+      Retryable.retryable(opts) do |retries|
+        yield(retries)
+      end
+    end
 
     def perform_request(method, endpoint, params)
       request_builder = RequestBuilder.new(method)
