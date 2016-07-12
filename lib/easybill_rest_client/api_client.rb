@@ -30,7 +30,7 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      @request_logger = RequestLogger.new(logger: logger, request_id: SecureRandom.hex)
+      @request_logger = RequestLogger.new(logger: logger, request_id: SecureRandom.hex(3))
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
           perform_request(method, endpoint, params).body
