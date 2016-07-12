@@ -5,9 +5,9 @@ require 'logger'
 require 'net/http'
 require 'securerandom'
 
-require 'easybill-rest-client/request_logger'
-require 'easybill-rest-client/request'
-require 'easybill-rest-client/response'
+require 'easybill_rest_client/request_logger'
+require 'easybill_rest_client/request'
+require 'easybill_rest_client/response'
 
 module EasybillRestClient
   class ApiClient
