@@ -42,10 +42,8 @@ module EasybillRestClient
 
     private
 
-    def retry_on(klass)
-      Retryable.retryable(retryable_opts(klass)) do
-        yield
-      end
+    def retry_on(klass, &block)
+      Retryable.retryable(retryable_opts(klass), &block)
     end
 
     def retryable_opts(klass)
@@ -77,10 +75,6 @@ module EasybillRestClient
       request = Request.new(api_key, method, endpoint, params)
       request_logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
       Response.new(request.run)
-    end
-
-    def format_log_message(msg)
-      "[easybill-rest-client] RequestId=#{request_id} #{msg}"
     end
 
     def fetch_pages
