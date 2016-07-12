@@ -28,7 +28,9 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      retry_on(EasybillRestClient::TooManyRequests) do
+      self.request_id = Time.now.to_f
+      retry_on(EasybillRestClient::TooManyRequests) do |too_many_request_retries|
+        logger.warn('Too many request!') if too_many_request_retries > 0
         retry_on(Net::OpenTimeout) do |open_timeout_retries|
           if open_timeout_retries > 0
             logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
@@ -37,22 +39,17 @@ module EasybillRestClient
           process_response(response)
         end
       end
+    rescue => e
+      logger.error("Request failed due to: #{e.class}: #{e.message}")
+      raise
     end
 
     private
 
     def retry_on(klass)
       opts = {
-        EasybillRestClient::TooManyRequests => {
-          tries: tries,
-          sleep: retry_cool_off_time,
-          on: klass
-        },
-        Net::OpenTimeout => {
-          tries: tries,
-          sleep: 0,
-          on: klass
-        }
+        EasybillRestClient::TooManyRequests => { tries: tries, sleep: retry_cool_off_time, on: klass },
+        Net::OpenTimeout => { tries: tries, sleep: 0, on: klass }
       }.fetch(klass)
 
       Retryable.retryable(opts) do |retries|
@@ -80,7 +77,8 @@ module EasybillRestClient
     def log_formatter
       formatter = Logger::Formatter.new
       lambda do |severity, datetime, progname, msg|
-        formatter.call(severity, datetime, progname, "[easybill-rest-client] #{msg}")
+        string = "[easybill-rest-client] RequestID=#{request_id} #{msg}"
+        formatter.call(severity, datetime, progname, string)
       end
     end
 
@@ -122,6 +120,7 @@ module EasybillRestClient
     end
 
     attr_reader :api_key, :retry_cool_off_time, :tries, :logger
+    attr_accessor :request_id
   end
 
   class ApiError < RuntimeError; end
