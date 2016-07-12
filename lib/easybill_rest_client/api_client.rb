@@ -28,7 +28,7 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      @logger.formatter = LogFormatter.new(request_id: Time.now.to_f)
+      logger.formatter = LogFormatter.new(request_id: Time.now.to_f)
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
           response = perform_request(method, endpoint, params)

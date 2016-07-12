@@ -30,10 +30,11 @@ RSpec.describe EasybillRestClient::ApiClient do
   context 'timeout while opening connection' do
     let(:response) { double('response') }
 
-    let(:logger) { instance_double(Logger, formatter: double(EasybillRestClient::LogFormatter)) }
+    let(:logger) { instance_double(Logger) }
 
     before do
       allow(subject).to receive(:logger).and_return(logger)
+      allow(logger).to receive(:formatter=)
     end
 
     it 'retries the request' do
