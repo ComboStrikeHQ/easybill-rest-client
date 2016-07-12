@@ -6,6 +6,7 @@ require 'net/http'
 
 require 'easybill-rest-client/log_formatter'
 require 'easybill-rest-client/request'
+require 'easybill-rest-client/response'
 
 module EasybillRestClient
   class ApiClient
@@ -31,8 +32,7 @@ module EasybillRestClient
       logger.formatter = LogFormatter.new(request_id: Time.now.to_f)
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
-          response = perform_request(method, endpoint, params)
-          process_response(response)
+          perform_request(method, endpoint, params).body
         end
       end
     rescue => e
@@ -76,30 +76,7 @@ module EasybillRestClient
     def perform_request(method, endpoint, params)
       request = Request.new(api_key, method, endpoint, params)
       logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
-      request.run
-    end
-
-    def process_response(response)
-      raise TooManyRequests if response.is_a?(Net::HTTPTooManyRequests)
-      body = extract_response_body(response)
-      unless response.is_a?(Net::HTTPSuccess)
-        message = body.is_a?(Hash) ? body[:message] : body
-        raise ApiError, message
-      end
-      body && !body.empty? ? body : nil
-    end
-
-    def extract_response_body(response)
-      return unless response.class.body_permitted?
-      case response.content_type
-      when 'application/json'
-        JSON.parse(response.body, symbolize_names: true)
-      when 'application/pdf'
-        /\Wfilename="(?<filename>.*?)"/ =~ response.fetch('content-disposition')
-        Pdf.new(filename: filename, content: response.body)
-      else
-        response.body
-      end
+      Response.new(request.run)
     end
 
     def fetch_pages

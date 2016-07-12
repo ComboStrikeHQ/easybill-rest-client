@@ -28,7 +28,7 @@ RSpec.describe EasybillRestClient::ApiClient do
   end
 
   context 'timeout while opening connection' do
-    let(:response) { double('response') }
+    let(:response) { double('response', body: '') }
 
     let(:logger) { instance_double(Logger) }
 
@@ -41,7 +41,6 @@ RSpec.describe EasybillRestClient::ApiClient do
       expect(subject).to receive(:perform_request).and_raise(Net::OpenTimeout)
       expect(logger).to receive(:warn).with('Unable to open connection after 5s, retrying...')
       expect(subject).to receive(:perform_request).and_return(response)
-      expect(subject).to receive(:process_response).with(response)
 
       subject.request(:get, '/things')
     end
