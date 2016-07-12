@@ -7,12 +7,12 @@ module EasybillRestClient
     end
 
     def call(severity, datetime, progname, msg)
-      @formatter.call(severity, datetime, progname, format_message(msg))
+      formatter.call(severity, datetime, progname, format_message(msg))
     end
 
     private
 
-    attr_reader :request_id
+    attr_reader :request_id, :formatter
 
     def format_message(msg)
       "[easybill-rest-client] RequestId=#{request_id} #{msg}"
