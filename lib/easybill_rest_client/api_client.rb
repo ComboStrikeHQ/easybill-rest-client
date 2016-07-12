@@ -4,7 +4,8 @@ require 'json'
 require 'logger'
 require 'net/http'
 
-require 'easybill_rest_client/request_builder'
+require 'easybill-rest-client/log_formatter'
+require 'easybill-rest-client/request'
 
 module EasybillRestClient
   class ApiClient
@@ -18,7 +19,6 @@ module EasybillRestClient
       @retry_cool_off_time = options.fetch(:retry_cool_off_time, DEFAULT_RETRY_COOL_OFF_TIME)
       @tries = options.fetch(:tries, DEFAULT_TRIES)
       @logger = options.fetch(:logger, Logger.new($stdout))
-      @logger.formatter = log_formatter
     end
 
     def request_collection(method, endpoint, params = {})
@@ -28,13 +28,9 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      self.request_id = Time.now.to_f
-      retry_on(EasybillRestClient::TooManyRequests) do |too_many_request_retries|
-        logger.warn('Too many request!') if too_many_request_retries > 0
-        retry_on(Net::OpenTimeout) do |open_timeout_retries|
-          if open_timeout_retries > 0
-            logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
-          end
+      @logger.formatter = LogFormatter.new(request_id: Time.now.to_f)
+      retry_on(EasybillRestClient::TooManyRequests) do
+        retry_on(Net::OpenTimeout) do
           response = perform_request(method, endpoint, params)
           process_response(response)
         end
@@ -47,39 +43,43 @@ module EasybillRestClient
     private
 
     def retry_on(klass)
-      opts = {
-        EasybillRestClient::TooManyRequests => { tries: tries, sleep: retry_cool_off_time, on: klass },
-        Net::OpenTimeout => { tries: tries, sleep: 0, on: klass }
-      }.fetch(klass)
-
-      Retryable.retryable(opts) do |retries|
+      Retryable.retryable(retryable_opts(klass)) do |retries|
         yield(retries)
       end
     end
 
-    def perform_request(method, endpoint, params)
-      request_builder = RequestBuilder.new(method)
-      uri = request_builder.build_uri(endpoint, params)
-      request = request_builder.build_request(api_key, uri.request_uri, params)
-      request_details = request_builder.request_details(uri, request)
-      log_request(method, endpoint, request_details)
+    def retryable_opts(klass)
+      {
+        EasybillRestClient::TooManyRequests => {
+          tries: tries,
+          sleep: retry_cool_off_time,
+          on: klass,
+          exception_cb: method(:log_too_many_requests)
+        },
+        Net::OpenTimeout => {
+          tries: tries,
+          sleep: 0,
+          on: klass,
+          exception_cb: method(:log_open_timeout)
+        }
+      }.fetch(klass)
+    end
 
-      Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
-        http.open_timeout = OPEN_TIMEOUT
-        http.request(request)
-      end
+    def log_open_timeout(_exception)
+      logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
+    end
+
+    def log_too_many_requests(_exception)
+      logger.warn('Too many request!')
+    end
+
+    def perform_request(method, endpoint, params)
+      request = Request.new(api_key, method, endpoint, params)
+      logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
+      request.run
     end
 
     def log_request(method, endpoint, params)
-      logger.info("#{method.to_s.upcase} #{endpoint} #{params}")
-    end
-
-    def log_formatter
-      formatter = Logger::Formatter.new
-      lambda do |severity, datetime, progname, msg|
-        string = "[easybill-rest-client] RequestID=#{request_id} #{msg}"
-        formatter.call(severity, datetime, progname, string)
-      end
     end
 
     def process_response(response)
@@ -120,7 +120,6 @@ module EasybillRestClient
     end
 
     attr_reader :api_key, :retry_cool_off_time, :tries, :logger
-    attr_accessor :request_id
   end
 
   class ApiError < RuntimeError; end
