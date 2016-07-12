@@ -43,8 +43,8 @@ module EasybillRestClient
     private
 
     def retry_on(klass)
-      Retryable.retryable(retryable_opts(klass)) do |retries|
-        yield(retries)
+      Retryable.retryable(retryable_opts(klass)) do
+        yield
       end
     end
 
@@ -77,9 +77,6 @@ module EasybillRestClient
       request = Request.new(api_key, method, endpoint, params)
       logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
       request.run
-    end
-
-    def log_request(method, endpoint, params)
     end
 
     def process_response(response)
