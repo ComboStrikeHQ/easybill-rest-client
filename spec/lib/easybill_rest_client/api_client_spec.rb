@@ -28,7 +28,7 @@ RSpec.describe EasybillRestClient::ApiClient do
   end
 
   context 'timeout while opening connection' do
-    let(:response) { double('response', body: '') }
+    let(:response) { instance_double(EasybillRestClient::Response, body: '') }
 
     let(:logger) { instance_double(Logger) }
 
