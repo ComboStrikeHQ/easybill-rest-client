@@ -3,6 +3,7 @@ require 'retryable'
 require 'json'
 require 'logger'
 require 'net/http'
+require 'securerandom'
 
 require 'easybill-rest-client/request_logger'
 require 'easybill-rest-client/request'
@@ -29,7 +30,7 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      @request_logger = RequestLogger.new(logger: logger, request_id: Time.now.to_f)
+      @request_logger = RequestLogger.new(logger: logger, request_id: SecureRandom.hex)
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
           perform_request(method, endpoint, params).body
