@@ -4,7 +4,7 @@ require 'json'
 require 'logger'
 require 'net/http'
 
-require 'easybill-rest-client/log_formatter'
+require 'easybill-rest-client/request_logger'
 require 'easybill-rest-client/request'
 require 'easybill-rest-client/response'
 
@@ -29,14 +29,14 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      logger.formatter = LogFormatter.new(request_id: Time.now.to_f)
+      @request_logger = RequestLogger.new(logger: logger, request_id: Time.now.to_f)
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
           perform_request(method, endpoint, params).body
         end
       end
     rescue => e
-      logger.error("Request failed due to: #{e.class}: #{e.message}")
+      request_logger.error("Request failed due to: #{e.class}: #{e.message}")
       raise
     end
 
@@ -66,17 +66,21 @@ module EasybillRestClient
     end
 
     def log_open_timeout(_exception)
-      logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
+      request_logger.warn("Unable to open connection after #{OPEN_TIMEOUT}s, retrying...")
     end
 
     def log_too_many_requests(_exception)
-      logger.warn('Too many request!')
+      request_logger.warn('Too many request!')
     end
 
     def perform_request(method, endpoint, params)
       request = Request.new(api_key, method, endpoint, params)
-      logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
+      request_logger.info("#{method.to_s.upcase} #{endpoint} #{request.request_details}")
       Response.new(request.run)
+    end
+
+    def format_log_message(msg)
+      "[easybill-rest-client] RequestId=#{request_id} #{msg}"
     end
 
     def fetch_pages
@@ -93,7 +97,7 @@ module EasybillRestClient
       end.lazy
     end
 
-    attr_reader :api_key, :retry_cool_off_time, :tries, :logger
+    attr_reader :api_key, :retry_cool_off_time, :tries, :logger, :request_logger
   end
 
   class ApiError < RuntimeError; end

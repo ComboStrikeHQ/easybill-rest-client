@@ -39,7 +39,8 @@ RSpec.describe EasybillRestClient::ApiClient do
 
     it 'retries the request' do
       expect(subject).to receive(:perform_request).and_raise(Net::OpenTimeout)
-      expect(logger).to receive(:warn).with('Unable to open connection after 5s, retrying...')
+      expect(logger).to receive(:warn)
+        .with(a_string_matching('Unable to open connection after 5s, retrying...'))
       expect(subject).to receive(:perform_request).and_return(response)
 
       subject.request(:get, '/things')
