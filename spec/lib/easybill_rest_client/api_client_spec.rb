@@ -4,7 +4,8 @@ RSpec.describe EasybillRestClient::ApiClient do
     described_class.new(
       api_key: ENV['EASYBILL_API_KEY'],
       retry_cool_off_time: 0,
-      logger: Logger.new(nil))
+      logger: Logger.new(nil)
+    )
   end
 
   context 'too many requests have been sent' do

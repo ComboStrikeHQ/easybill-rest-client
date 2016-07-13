@@ -18,7 +18,7 @@ RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
       expect(payment.amount).to eq(3367)
       expect(payment.document_id).to eq(84730384)
       expect(payment.notice).to eq('Blah!')
-      expect(payment.payment_at).to eq(Date.new(2016, 06, 10))
+      expect(payment.payment_at).to eq(Date.new(2016, 6, 10))
       expect(payment.type).to eq('Überweisung')
     end
   end

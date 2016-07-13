@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'easybill-rest-client/generic_api'
+require 'easybill_rest_client/generic_api'
 
 module EasybillRestClient
   class DocumentPaymentApi < GenericApi

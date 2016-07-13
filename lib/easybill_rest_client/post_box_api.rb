@@ -1,14 +1,14 @@
 # frozen_string_literal: true
-require 'easybill-rest-client/generic_api'
+require 'easybill_rest_client/generic_api'
 
 module EasybillRestClient
-  class CustomerApi < GenericApi
+  class PostBoxApi < GenericApi
     def resource_name
-      'customers'
+      'post-boxes'
     end
 
     def resource_class
-      Customer
+      PostBox
     end
   end
 end

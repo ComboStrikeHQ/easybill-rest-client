@@ -26,11 +26,14 @@ module EasybillRestClient
         expect(subject.find_all(number: 'TEST').to_a).to be_empty
       end
 
-      customer = subject.create(subject.build(
-        number: 'TEST',
-        company_name: 'Fake',
-        first_name: 'John',
-        last_name: 'Doe'))
+      customer = subject.create(
+        subject.build(
+          number: 'TEST',
+          company_name: 'Fake',
+          first_name: 'John',
+          last_name: 'Doe'
+        )
+      )
 
       customer.first_name = 'Bob'
       subject.update(customer)

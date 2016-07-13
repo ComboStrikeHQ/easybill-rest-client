@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-require 'easybill-rest-client/api_client'
-require 'easybill-rest-client/customer_api'
-require 'easybill-rest-client/document_api'
-require 'easybill-rest-client/post_box_api'
-require 'easybill-rest-client/document_payment_api'
+require 'easybill_rest_client/api_client'
+require 'easybill_rest_client/customer_api'
+require 'easybill_rest_client/document_api'
+require 'easybill_rest_client/post_box_api'
+require 'easybill_rest_client/document_payment_api'
 
 module EasybillRestClient
   class Client

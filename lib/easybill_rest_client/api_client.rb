@@ -4,7 +4,7 @@ require 'json'
 require 'logger'
 require 'net/http'
 
-require 'easybill-rest-client/request_builder'
+require 'easybill_rest_client/request_builder'
 
 module EasybillRestClient
   class ApiClient

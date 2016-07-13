@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'easybill-rest-client/version'
+require 'easybill_rest_client/version'
 
 Gem::Specification.new do |s|
   s.name        = 'easybill-rest-client'
