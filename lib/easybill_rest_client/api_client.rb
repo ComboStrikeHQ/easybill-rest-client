@@ -30,7 +30,7 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      @request_logger = RequestLogger.new(logger: logger, request_id: SecureRandom.hex(3))
+      self.request_logger = RequestLogger.new(logger: logger, request_id: SecureRandom.hex(3))
       retry_on(EasybillRestClient::TooManyRequests) do
         retry_on(Net::OpenTimeout) do
           perform_request(method, endpoint, params).body
@@ -78,6 +78,14 @@ module EasybillRestClient
       Response.new(request.run)
     end
 
+    def request_logger
+      Thread.current[:request_logger]
+    end
+
+    def request_logger=(logger)
+      Thread.current[:request_logger] = logger
+    end
+
     def fetch_pages
       Enumerator.new do |y|
         page = 1
@@ -92,7 +100,7 @@ module EasybillRestClient
       end.lazy
     end
 
-    attr_reader :api_key, :retry_cool_off_time, :tries, :logger, :request_logger
+    attr_reader :api_key, :retry_cool_off_time, :tries, :logger
   end
 
   class ApiError < RuntimeError; end
