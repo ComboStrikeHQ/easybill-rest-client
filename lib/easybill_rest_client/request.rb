@@ -44,8 +44,8 @@ module EasybillRestClient
       :retry_cool_off_time
 
     def perform_request
-      Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
-        http.open_timeout = OPEN_TIMEOUT
+      http_opts = { use_ssl: uri.scheme == 'https', open_timeout: OPEN_TIMEOUT }
+      Net::HTTP.start(uri.host, uri.port, http_opts) do |http|
         http.request(request)
       end
     end
