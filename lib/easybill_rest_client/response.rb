@@ -2,7 +2,6 @@
 module EasybillRestClient
   class Response
     def initialize(response)
-      raise TooManyRequests if response.is_a?(Net::HTTPTooManyRequests)
       @response = response
     end
 
@@ -32,4 +31,6 @@ module EasybillRestClient
       end
     end
   end
+
+  class ApiError < RuntimeError; end
 end
