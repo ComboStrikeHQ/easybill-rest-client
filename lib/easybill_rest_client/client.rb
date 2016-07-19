@@ -12,15 +12,15 @@ module EasybillRestClient
     end
 
     def customers
-      @customer_api ||= CustomerApi.new(api_client)
+      @customers ||= CustomerApi.new(api_client)
     end
 
     def documents
-      @document_api ||= DocumentApi.new(api_client)
+      @documents ||= DocumentApi.new(api_client)
     end
 
     def post_boxes
-      @document_api ||= PostBoxApi.new(api_client)
+      @post_boxes ||= PostBoxApi.new(api_client)
     end
 
     def document_payments
