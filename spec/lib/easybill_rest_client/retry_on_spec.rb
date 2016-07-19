@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+RSpec.describe EasybillRestClient::RetryOn do
+  let(:logger) { instance_double(Logger) }
+  subject { described_class.new(logger, 2, 0) }
+
+  context 'timeout while opening connection' do
+    it 'retries the request' do
+      expect(logger).to receive(:warn).with('Unable to open connection after 5s, retrying...')
+
+      raise_error = true
+      subject.retry_on(Net::OpenTimeout) do
+        if raise_error
+          raise_error = false
+          raise Net::OpenTimeout
+        end
+      end
+    end
+  end
+
+  context 'too many requests' do
+    it 'retries the request' do
+      expect(logger).to receive(:warn).with('Too many requests!')
+
+      raise_error = true
+      subject.retry_on(EasybillRestClient::TooManyRequests) do
+        if raise_error
+          raise_error = false
+          raise EasybillRestClient::TooManyRequests
+        end
+      end
+    end
+  end
+end

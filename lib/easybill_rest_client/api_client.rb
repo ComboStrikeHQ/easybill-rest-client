@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-require 'retryable'
 require 'json'
 require 'logger'
 require 'net/http'
+require 'securerandom'
 
-require 'easybill_rest_client/request_builder'
+require 'easybill_rest_client/request'
+require 'easybill_rest_client/response'
 
 module EasybillRestClient
   class ApiClient
@@ -26,56 +27,19 @@ module EasybillRestClient
     end
 
     def request(method, endpoint, params = {})
-      Retryable.retryable(
+      request = Request.new(
+        api_key: api_key,
+        method: method,
+        endpoint: endpoint,
+        params: params,
+        logger: logger,
         tries: tries,
-        sleep: retry_cool_off_time,
-        on: EasybillRestClient::TooManyRequests
-      ) do
-        response = perform_request(method, endpoint, params)
-        process_response(response)
-      end
+        retry_cool_off_time: retry_cool_off_time
+      )
+      Response.new(request.run).body
     end
 
     private
-
-    def perform_request(method, endpoint, params)
-      request_builder = RequestBuilder.new(method)
-      uri = request_builder.build_uri(endpoint, params)
-      request = request_builder.build_request(api_key, uri.request_uri, params)
-      request_details = request_builder.request_details(uri, request)
-      log_request(method, endpoint, request_details)
-
-      Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
-        http.request(request)
-      end
-    end
-
-    def log_request(method, endpoint, params)
-      logger.info("[easybill-rest-client] #{method.to_s.upcase} #{endpoint} #{params}")
-    end
-
-    def process_response(response)
-      raise TooManyRequests if response.is_a?(Net::HTTPTooManyRequests)
-      body = extract_response_body(response)
-      unless response.is_a?(Net::HTTPSuccess)
-        message = body.is_a?(Hash) ? body[:message] : body
-        raise ApiError, message
-      end
-      body && !body.empty? ? body : nil
-    end
-
-    def extract_response_body(response)
-      return unless response.class.body_permitted?
-      case response.content_type
-      when 'application/json'
-        JSON.parse(response.body, symbolize_names: true)
-      when 'application/pdf'
-        /\Wfilename="(?<filename>.*?)"/ =~ response.fetch('content-disposition')
-        Pdf.new(filename: filename, content: response.body)
-      else
-        response.body
-      end
-    end
 
     def fetch_pages
       Enumerator.new do |y|
@@ -93,7 +57,4 @@ module EasybillRestClient
 
     attr_reader :api_key, :retry_cool_off_time, :tries, :logger
   end
-
-  class ApiError < RuntimeError; end
-  class TooManyRequests < ApiError; end
 end
