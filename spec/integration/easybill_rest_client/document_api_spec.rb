@@ -53,6 +53,12 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
         d
       end
 
+      after do
+        subject.delete(paid_document.id)
+        subject.delete(unpaid_document.id)
+        client.customers.delete(customer.id)
+      end
+
       it 'returns only unpaid documents' do
         documents = subject.find_all(paid_at: nil,
                                      number: [paid_document.number, unpaid_document.number])
