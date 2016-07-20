@@ -54,8 +54,23 @@ module EasybillRestClient
       return @uri if @uri
       @uri = URI.parse(BASE_URL)
       @uri.path << endpoint
-      @uri.query = URI.encode_www_form(comma_separate_arrays(params.dup)) unless body_allowed?
+      @uri.query = URI.encode_www_form(query_params) unless body_allowed?
       @uri
+    end
+
+    def query_params
+      params.map { |key, value| [key, translate_query_value(value)] }.to_h
+    end
+
+    def translate_query_value(value)
+      case value
+      when Array
+        value.join(',')
+      when nil
+        'null'
+      else
+        value
+      end
     end
 
     def request
@@ -72,10 +87,6 @@ module EasybillRestClient
 
     def body_allowed?
       request_class::REQUEST_HAS_BODY
-    end
-
-    def comma_separate_arrays(params)
-      params.map { |k, v| [k, v.is_a?(Array) ? v.join(',') : v] }.to_h
     end
 
     def retry_on(exception, &block)

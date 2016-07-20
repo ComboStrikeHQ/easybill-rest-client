@@ -28,6 +28,39 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
       expect(documents.count).to eq(1)
       expect(documents.first.number).to eq('XYZ-123')
     end
+
+    context 'paid and unpaid documents exist' do
+      let(:customer) do
+        client.customers.create(
+          EasybillRestClient::Customer.new(last_name: 'Mustermann',
+                                           company_name: 'ACME Corp.')
+        )
+      end
+
+      let(:unpaid_document) do
+        d = subject.create(EasybillRestClient::Document.new(customer_id: customer.id))
+        subject.finish(d.id)
+      end
+
+      let(:paid_document) do
+        d = subject.create(EasybillRestClient::Document.new(customer_id: customer.id))
+        subject.finish(d.id)
+        client.document_payments.create(
+          EasybillRestClient::DocumentPayment.new(document_id: d.id,
+                                                  paid: true,
+                                                  amount: 0)
+        )
+        d
+      end
+
+      it 'returns only unpaid documents' do
+        documents = subject.find_all(paid_at: nil,
+                                     number: [paid_document.number, unpaid_document.number])
+        expect(documents.count).to eq(1)
+        expect(documents.first.paid_at).to be_nil
+        expect(documents.first.id).to eq(unpaid_document.id)
+      end
+    end
   end
 
   describe '#create' do
