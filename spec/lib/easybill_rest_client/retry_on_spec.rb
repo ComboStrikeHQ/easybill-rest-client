@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 RSpec.describe EasybillRestClient::RetryOn do
   let(:logger) { instance_double(Logger) }
+
   subject { described_class.new(logger, 2, 0) }
+
+  let(:open_timeout) { EasybillRestClient::Request::OPEN_TIMEOUT }
 
   context 'timeout while opening connection' do
     it 'retries the request' do
-      expect(logger).to receive(:warn).with('Unable to open connection after 5s, retrying...')
+      expect(logger).to receive(:warn)
+        .with("Unable to open connection after #{open_timeout}s, retrying...")
 
       raise_error = true
       subject.retry_on(Net::OpenTimeout) do

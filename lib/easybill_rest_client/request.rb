@@ -7,7 +7,7 @@ module EasybillRestClient
     BASE_URL = 'https://api.easybill.de/rest/v1'
     USERNAME = 'rest-api@easybill.de'
     SUPPORTED_METHODS = %i(get post put delete).freeze
-    OPEN_TIMEOUT = 5
+    OPEN_TIMEOUT = 30
 
     def initialize(opts = {})
       unless SUPPORTED_METHODS.include?(opts.fetch(:method).to_sym)
