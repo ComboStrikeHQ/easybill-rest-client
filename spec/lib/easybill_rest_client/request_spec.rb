@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe EasybillRestClient::Request do
-  subject do
+  subject(:request) do
     described_class.new(
       api_key: 'api-key',
       method: :get,
@@ -25,7 +25,7 @@ RSpec.describe EasybillRestClient::Request do
     it 'retries api calls that return a "Too Many Requests" error' do
       allow(Net::HTTP).to receive(:start).and_return(too_many_requests, ok)
 
-      expect(subject.run.body).to eq('BODYBODYBODY')
+      expect(request.run.body).to eq('BODYBODYBODY')
     end
   end
 end

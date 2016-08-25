@@ -2,7 +2,7 @@
 RSpec.describe EasybillRestClient::RetryOn do
   let(:logger) { instance_double(Logger) }
 
-  subject { described_class.new(logger, 2, 0) }
+  subject(:retry_handler) { described_class.new(logger, 2, 0) }
 
   let(:open_timeout) { EasybillRestClient::Request::OPEN_TIMEOUT }
 
@@ -12,7 +12,7 @@ RSpec.describe EasybillRestClient::RetryOn do
         .with("Unable to open connection after #{open_timeout}s, retrying...")
 
       raise_error = true
-      subject.retry_on(Net::OpenTimeout) do
+      retry_handler.retry_on(Net::OpenTimeout) do
         if raise_error
           raise_error = false
           raise Net::OpenTimeout
@@ -26,7 +26,7 @@ RSpec.describe EasybillRestClient::RetryOn do
       expect(logger).to receive(:warn).with('Too many requests!')
 
       raise_error = true
-      subject.retry_on(EasybillRestClient::TooManyRequests) do
+      retry_handler.retry_on(EasybillRestClient::TooManyRequests) do
         if raise_error
           raise_error = false
           raise EasybillRestClient::TooManyRequests
