@@ -110,7 +110,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
       expect(api.find(84718807)).not_to be_nil
       expect(api.delete(84718807)).to be_nil
       expect { api.find(84718807) }
-        .to raise_error(EasybillRestClient::ApiError, 'Document#84718807 not found.')
+        .to raise_error(EasybillRestClient::ApiError, /Document#84718807 not found./)
     end
   end
 

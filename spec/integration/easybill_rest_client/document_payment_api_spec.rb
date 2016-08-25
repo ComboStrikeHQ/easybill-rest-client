@@ -26,7 +26,7 @@ RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
       expect(api.find(74692458)).to be_a(EasybillRestClient::DocumentPayment)
       expect(api.delete(74692458)).to be_nil
       expect { api.find(74692458) }
-        .to raise_error(EasybillRestClient::ApiError, 'DocumentPayment#74692458 not found.')
+        .to raise_error(EasybillRestClient::ApiError, /DocumentPayment#74692458 not found./)
     end
   end
 

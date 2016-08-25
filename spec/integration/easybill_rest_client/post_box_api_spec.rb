@@ -24,7 +24,7 @@ RSpec.describe EasybillRestClient::PostBoxApi, :vcr do
       api.find(58942178)
       api.delete(58942178)
       expect { api.find(58942178) }
-        .to raise_error(EasybillRestClient::ApiError, 'PostBox#58942178 not found.')
+        .to raise_error(EasybillRestClient::ApiError, /PostBox#58942178 not found./)
     end
   end
 end
