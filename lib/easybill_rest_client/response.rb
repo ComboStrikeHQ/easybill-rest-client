@@ -8,8 +8,7 @@ module EasybillRestClient
     def body
       body = extract_response_body(response)
       unless response.is_a?(Net::HTTPSuccess)
-        message = body.is_a?(Hash) ? body[:message] : body
-        raise ApiError, message
+        raise ApiError, body.inspect
       end
       body && !body.empty? ? body : nil
     end
