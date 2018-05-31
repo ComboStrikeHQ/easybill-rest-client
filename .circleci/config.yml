@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+        environment:
+          BUNDLE_PATH: vendor/bundle
+    steps:
+      - checkout
+
+      - run:
+          name: Check if Ruby versions match
+          command: test "$(ruby -v | grep -oP '\d\.\d\.\d')" = "$(cat .ruby-version)"
+
+      - restore_cache:
+          keys:
+            - gem-cache-{{ checksum ".ruby-version" }}
+
+      - run:
+          name: Install dependencies
+          command: bundle check || bundle install --jobs=4 --retry=3
+
+      - run: bundle exec rake rubocop
+      - run: bundle exec rspec
+
+      - save_cache:
+          key: gem-cache-{{ checksum ".ruby-version" }}
+          paths:
+            - vendor/bundle
