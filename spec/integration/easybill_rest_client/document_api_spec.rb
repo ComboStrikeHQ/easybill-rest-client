@@ -95,6 +95,10 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     it 'sends an email' do
       expect(api.send_email(84718807)).to be_nil
     end
+
+    it 'passes on additional params' do
+      expect(api.send_email(257330466, to: 'developers@ad2games.com')).to be_nil
+    end
   end
 
   describe '#finish' do
