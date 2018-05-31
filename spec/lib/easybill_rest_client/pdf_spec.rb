@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe EasybillRestClient::Pdf do
   describe '#filename' do
     context 'filename ends with ".pdf"' do

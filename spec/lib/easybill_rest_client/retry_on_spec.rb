@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-RSpec.describe EasybillRestClient::RetryOn do
-  let(:logger) { instance_double(Logger) }
 
+RSpec.describe EasybillRestClient::RetryOn do
   subject(:retry_handler) { described_class.new(logger, 2, 0) }
 
+  let(:logger) { instance_double(Logger) }
   let(:open_timeout) { EasybillRestClient::Request::OPEN_TIMEOUT }
 
   context 'timeout while opening connection' do

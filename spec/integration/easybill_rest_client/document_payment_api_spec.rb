@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 RSpec.describe EasybillRestClient::DocumentPaymentApi, :vcr do
   subject(:api) { client.document_payments }
 
   describe '#find_all' do
     it 'returns document payments' do
       payments = api.find_all.to_a
-      expect(payments.last.id).to be_a(Fixnum)
+      expect(payments.last.id).to be_a(Integer)
     end
   end
 

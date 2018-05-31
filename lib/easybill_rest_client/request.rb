@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'easybill_rest_client/request_logger'
 require 'easybill_rest_client/retry_on'
 
@@ -6,7 +7,7 @@ module EasybillRestClient
   class Request
     BASE_URL = 'https://api.easybill.de/rest/v1'
     USERNAME = 'rest-api@easybill.de'
-    SUPPORTED_METHODS = %i(get post put delete).freeze
+    SUPPORTED_METHODS = %i[get post put delete].freeze
     OPEN_TIMEOUT = 30
 
     def initialize(opts = {})
@@ -40,8 +41,7 @@ module EasybillRestClient
 
     private
 
-    attr_reader :api_key, :method, :endpoint, :params, :logger, :request_logger, :retry_on, :tries,
-      :retry_cool_off_time
+    attr_reader :api_key, :method, :endpoint, :params, :logger, :tries, :retry_cool_off_time
 
     def perform_request
       http_opts = { use_ssl: uri.scheme == 'https', open_timeout: OPEN_TIMEOUT }

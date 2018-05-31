@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module EasybillRestClient
   class GenericApi
     def initialize(api_client)

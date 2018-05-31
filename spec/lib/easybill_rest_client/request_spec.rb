@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe EasybillRestClient::Request do
   subject(:request) do
     described_class.new(

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'virtus'
 
 require 'easybill_rest_client/customer'
