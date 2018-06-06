@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module EasybillRestClient
   class Response
     def initialize(response)

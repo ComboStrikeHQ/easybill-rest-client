@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module EasybillRestClient
   RSpec.describe CustomerApi, :vcr do
     subject(:api) { client.customers }
@@ -7,9 +8,7 @@ module EasybillRestClient
       it 'gets all customers' do
         customers = api.find_all.to_a
         expect(customers).not_to be_empty
-        customers.each do |customer|
-          expect(customer).to be_a(Customer)
-        end
+        expect(customers).to all(be_a(Customer))
       end
 
       it 'gets customers matching a filter' do

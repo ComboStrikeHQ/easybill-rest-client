@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'easybill_rest_client/generic_api'
 
 module EasybillRestClient
@@ -15,8 +16,8 @@ module EasybillRestClient
       api_client.request(:get, "/#{resource_name}/#{document_id}/pdf")
     end
 
-    def send_email(document_id)
-      api_client.request(:post, "/#{resource_name}/#{document_id}/send/email")
+    def send_email(document_id, email_params = {})
+      api_client.request(:post, "/#{resource_name}/#{document_id}/send/email", email_params)
     end
 
     def finish(document_id)

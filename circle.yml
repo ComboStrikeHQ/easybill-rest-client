@@ -1,7 +1,0 @@
-machine:
-  ruby:
-    version: 2.2.3
-dependencies:
-  override:
-    - bundle install
-    - bundle exec rake rubocop

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe EasybillRestClient::DocumentApi, :vcr do
   subject(:api) { client.documents }
 
@@ -95,6 +96,10 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     it 'sends an email' do
       expect(api.send_email(84718807)).to be_nil
     end
+
+    it 'passes on additional params' do
+      expect(api.send_email(257330466, to: 'developers@ad2games.com')).to be_nil
+    end
   end
 
   describe '#finish' do
@@ -118,7 +123,7 @@ RSpec.describe EasybillRestClient::DocumentApi, :vcr do
     it 'cancels a document' do
       expect(api.find(84727902).cancel_id).to be_nil
       expect(api.cancel(84727902)).to be_a(EasybillRestClient::Document)
-      expect(api.find(84727902).cancel_id).to be_a(Fixnum)
+      expect(api.find(84727902).cancel_id).to be_a(Integer)
     end
   end
 end

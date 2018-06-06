@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module EasybillRestClient
   class RequestLogger
     def initialize(logger:, request_id:)
@@ -6,7 +7,7 @@ module EasybillRestClient
       @request_id = request_id
     end
 
-    %i(info warn error).each do |method|
+    %i[info warn error].each do |method|
       define_method(method) do |msg|
         logger.public_send(method, format_message(msg))
       end

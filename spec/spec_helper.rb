@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'pry'
 require 'vcr'
 Dir[File.expand_path('../support/*.rb', __FILE__)].each { |rb| require rb }
@@ -18,7 +19,7 @@ RSpec.configure do |config|
 end
 
 VCR.configure do |c|
-  c.default_cassette_options = { match_requests_on: %i(method uri body) }
+  c.default_cassette_options = { match_requests_on: %i[method uri body] }
   c.configure_rspec_metadata!
   c.cassette_library_dir = 'spec/fixtures/vcr'
   c.hook_into :webmock
