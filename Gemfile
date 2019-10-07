@@ -3,4 +3,4 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'rubocop-ci', git: 'https://github.com/ad2games/rubocop-ci'
+gem 'rubocop-ci', git: 'https://github.com/ComboStrikeHQ/rubocop-ci'
